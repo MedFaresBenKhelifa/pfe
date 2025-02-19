@@ -1,0 +1,300 @@
+* {
+  font-family:  Georgia , serif;
+}
+
+:host {
+  display: contents;
+}
+
+.page-container {
+  margin-top: 8vw;
+  margin-bottom: 8vw;
+}
+
+.illustrator {
+  width: 30vw;
+}
+
+.signup-section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto;
+  gap: 10vw;
+  font-family: Neulis Alt, sans-serif;
+  flex-wrap: nowrap;
+  padding: 20px 0;
+}
+
+.signup {
+  border-radius: 24px;
+  border: 2.5px solid var(--Cards-Stroke, #b5b5b5);
+  background: linear-gradient(155deg,
+      rgba(181, 181, 181, 0.25) 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(228, 228, 228, 0.25) 100%);
+  backdrop-filter: blur(100px);
+  padding: 35px 50px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
+}
+
+.tunilanci-logo {
+  aspect-ratio: 4;
+  width: 30px;
+  height: 30px;
+}
+
+.signup-title {
+  color: rgb(162, 5, 26);
+  font-size: 2.5vw;
+  line-height: 1.2;
+}
+
+.continue-with-button {
+  text-shadow: 2px 2px 8px rgba(162, 5, 26, 0.5);
+  border-radius: 43px;
+  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
+  background-color: rgba(228, 228, 228, 0.1);
+  margin-top: 12px;
+  min-height: 24px;
+  width: 20vw;
+  font-size: 1vw;
+  color: #0d0d0d;
+  line-height: 1.2;
+  padding: 20px 10px;
+  border: 2px rgba(162, 5, 26, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.continue-logo {
+  aspect-ratio: 1.5;
+  width: 2vw;
+}
+
+.divider-container {
+  margin-top: 20px;
+  min-width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  font: 400 16px/1.2 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.divider-line {
+  background-color: var(--Black, #0d0d0d);
+  height: 2px;
+  flex: 0;
+  flex-basis: 20%;
+}
+
+.divider-text {
+  color: var(--Black, #0d0d0d);
+  text-align: center;
+  font-size: 1vw;
+}
+
+.signup-form {
+  margin-top: 25px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 28vw;
+}
+
+.form-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  flex-basis: 100%;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 59px;
+  background-color: rgba(255, 255, 255, 1);
+  min-height: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  border: 3px #e4e4e4;
+  font-size: 1vw;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 2px 2px 6px rgba(162, 5, 26, 0.3);
+}
+
+.input-group::placeholder {
+  color: rgba(138, 134, 134, 0.5);
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group:hover {
+  background-color: #e4e4e4;
+}
+
+.input-group:focus {
+  border: 2px solid rgb(162, 5, 26);
+  box-shadow: 0px 0px 10px rgba(162, 5, 26, 0.6);
+}
+
+.password-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 4.5vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eye-icon img {
+  aspect-ratio: 1;
+  width: 1.5vw;
+}
+
+.agreement-section {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 10px;
+  width: 80%;
+  color: rgb(162, 5, 26);
+  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 1.1vw;
+  padding: 0 20px;
+}
+
+.checkbox {
+  aspect-ratio: 1;
+  width: 2.5vw;
+  margin-top: 0.5vw;
+  margin-right: 4px;
+  background-color: rgba(187, 200, 193, 1);
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px rgba(162, 5, 26, 0.4);
+}
+
+.agreement-text {
+  display: block;
+  color: black;
+}
+
+.highlighted-text {
+  text-decoration: underline;
+  color: rgb(162, 5, 26);
+}
+
+.cta-button {
+  text-shadow: 2px 2px 8px rgba(162, 5, 26, 0.5);
+  border-radius: 43px;
+  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
+  background-color: rgb(162, 5, 26);
+  margin-top: 25px;
+  font-size: 1.2vw;
+  font-weight: 400;
+  color: #e4e4e4;
+  line-height: 1.2;
+  padding: 8px 20px;
+  border: 2px solid rgb(162, 5, 26);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(162, 5, 26);
+  font-size: 1.5vw;
+  opacity: 0;
+  transition: opacity 0.3s ease, left 0.3s ease;
+}
+
+.cta-button:hover::before {
+  content: ">";
+  left: 10px;
+  opacity: 1;
+}
+
+.cta-button:hover {
+  padding: 10px 2vw;
+  background-color: transparent;
+  color: rgb(162, 5, 26);
+  transform: translateY(-2px);
+}
+
+.cta-button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.question {
+  font-size: 1.2vw;
+  margin-top: 20px;
+}
+.checkbox {
+  appearance: none;
+  width: 2.5vw;
+  height: 2.5vw;
+  border: 2px solid rgb(162, 5, 26);
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 8px rgba(162, 5, 26, 0.4);
+}
+
+.checkbox:checked {
+  background-color: rgb(162, 5, 26);
+  border-color: rgb(162, 5, 26);
+  position: relative;
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+.login-link {
+  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
+  color: rgb(162, 5, 26);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+  font-size: 1.3vw;
+}

@@ -1,0 +1,61 @@
+<main class="page-container">
+  <section class="signup-section">
+      <div class="signup">
+          <img src="images/header/logo.png"  class="tunilanci-logo">
+          <h1 class="signup-title">Sign Up</h1>
+          <div class="divider-container" role="separator" aria-orientation="horizontal">
+              <div class="divider-line"></div>
+              <div class="divider-text">Create your account</div>
+              <div class="divider-line"></div>
+          </div>
+          <div class="signup-form">
+              <form class="form">
+                  <div class="form-line">
+                      <input type="text" placeholder="First Name" class="input-group" name="first-name" required>
+                      <input type="text" placeholder="Last Name" class="input-group" name="last-name" required>
+                  </div>
+                  <div class="form-line">
+                      <input type="email" placeholder="Email" class="input-group" name="email" required>
+                  </div>
+                  <div class="password-line">
+                      <input 
+                        [type]="isPasswordVisible ? 'text' : 'password'" 
+                        placeholder="Password (8 or more characters)" 
+                        class="input-group" 
+                        id="password-input" 
+                        required 
+                      />
+                      <button 
+                        type="button" 
+                        (click)="togglePasswordVisibility()" 
+                        class="eye-icon"
+                        aria-label="Toggle password visibility">
+                        <img 
+                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
+                          alt="eye icon" 
+                        />
+                      </button>
+                    </div>
+                    <div class="agreement-section">
+                      <input type="checkbox" id="agreement" class="checkbox" />
+                      <label for="agreement" class="agreement-text">
+                        I understand and agree to the
+                        <span class="highlighted-text"> Terms of Service</span>,
+                        including the
+                        <span class="highlighted-text">Privacy Policy</span>.
+                      </label>
+                    </div>
+              </form>
+          </div>
+          <button class="cta-button">
+              <span>Join</span>
+          </button>
+          <div class="question">
+              <p>Having an account?</p>
+          </div>
+          <div>
+              <a href="#" class="login-link">Login</a>
+          </div>
+      </div>
+  </section>
+</main> 

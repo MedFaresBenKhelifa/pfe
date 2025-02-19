@@ -1,0 +1,42 @@
+<main class="page-container">
+  <section class="signup-section">
+      <div class="signup">
+          <img src="images/header/logo.png"  class="atb-logo">
+          <h1 class="signup-title">Log In</h1>
+          <div class="signup-form">
+              <form class="form">
+                  <div class="form-line">
+                      <input type="text" placeholder="Mot de Passe actuel" [type]="isPasswordVisible ? 'text' : 'password'"  class="input-group" required>
+                      <button 
+                      type="button" 
+                      (click)="togglePasswordVisibility()" 
+                      class="eye-icon"
+                      aria-label="Toggle password visibility">
+                      <img 
+                        [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
+                        alt="eye icon" 
+                      />
+                    </button>
+                  </div>
+                  <div class="password-line">
+                      <input 
+                        placeholder="Nouveau Mot de Passe " 
+                        class="input-group" 
+                        id="password-input" 
+                        required 
+                      />
+                  </div>
+                  <div class="password-line">
+                    <input 
+                      placeholder="Confirmation de Nouveau Mot de Passe " 
+                      class="input-group" 
+                      id="password-input" 
+                      required 
+                    />
+                </div>
+              </form>
+          </div>
+          <button  class="cta-button">Modifier Mot De Passe</button>
+      </div>
+  </section>
+</main> 

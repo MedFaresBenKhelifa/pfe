@@ -1,0 +1,144 @@
+
+:root {
+  --primary-color: #2A5C8B;
+  --success-color: #4CAF50;
+  --text-primary: #2D3748;
+  --card-bg: #FFFFFF;
+  --background: #F8FAFC;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.dashboard-header h1 {
+  margin-top: 30px; /* Moves title lower */
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --primary-color: #63B4FF;
+  --success-color: #81C784;
+  --text-primary: #E2E8F0;
+  --card-bg: #2D3748;
+  --background: #1A202C;
+}
+
+
+/* Default Light Mode */
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Apply full black background when dark mode is active */
+[data-theme="dark"] body {
+  background: #000000 !important; /* Full black screen */
+  color: #FFFFFF !important; /* White text for visibility */
+}
+
+/* Dark mode for cards and other UI elements */
+[data-theme="dark"] .card {
+  background: #1A1A1A; /* Dark gray for cards */
+  color: #FFFFFF;
+}
+
+/* Dark mode for header */
+[data-theme="dark"] .dashboard-header {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+/* Dark mode for status indicator */
+[data-theme="dark"] .status-indicator {
+  background: #333333;
+  color: #81C784;
+}
+
+/* Dark mode for the live pulse */
+[data-theme="dark"] .live-pulse {
+  background: #4CAF50;
+}
+
+/* Dark mode for buttons */
+[data-theme="dark"] .theme-toggle {
+  background: #444444;
+  color: #FFFFFF;
+  border: 1px solid #777777;
+}
+
+/* Dashboard container */
+.dashboard-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Dashboard header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Dashboard grid */
+.dashboard-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Card styling */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, background 0.3s, color 0.3s;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Status indicator */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #F0FAF0;
+  color: var(--success-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Live pulse animation */
+.live-pulse {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--success-color);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}

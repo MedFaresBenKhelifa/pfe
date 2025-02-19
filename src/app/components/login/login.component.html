@@ -1,0 +1,50 @@
+<main class="page-container">
+  <section class="signup-section">
+      <div class="signup">
+          <img src="images/header/logo.png"  class="tunilanci-logo">
+          <h1 class="signup-title">Log In</h1>
+          <div class="signup-form">
+              <form class="form">
+                  <div class="form-line">
+                      <input type="text" placeholder="Email or Username" class="input-group" name="email" required>
+                  </div>
+                  <div class="password-line">
+                      <input 
+                        [type]="isPasswordVisible ? 'text' : 'password'" 
+                        placeholder="Password" 
+                        class="input-group" 
+                        id="password-input" 
+                        required 
+                      />
+                      <button 
+                        type="button" 
+                        (click)="togglePasswordVisibility()" 
+                        class="eye-icon"
+                        aria-label="Toggle password visibility">
+                        <img 
+                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
+                          alt="eye icon" 
+                        />
+                      </button>
+                  </div>
+                  <a href="/change"  class="forget-password">Forgot Password?</a>
+                  <div class="agreement-section">
+                      <input type="checkbox" id="agreement" class="checkbox" />
+                      <label for="agreement" class="agreement-text">
+                        <span>Remember me</span>
+                      </label>
+                  </div>
+              </form>
+          </div>
+          <button  class="cta-button" (click)="join()" >Log In</button>
+          <div class="divider-container" role="separator" aria-orientation="horizontal">
+            <div class="divider-line"></div>
+            <div class="divider-text">Don't have an account ?</div>
+            <div class="divider-line"></div>
+        </div>
+          <div>
+            <a href="/SignUp" class="login-link">Sign Up</a>
+          </div>
+      </div>
+  </section>
+</main> 

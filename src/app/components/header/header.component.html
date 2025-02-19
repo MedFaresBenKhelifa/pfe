@@ -1,0 +1,20 @@
+<nav class="navigation-bar" role="navigation" aria-label="Main navigation">
+  <a routerLink="/" routerLinkActive="active"><img
+    loading="lazy"
+    src="images/header/logo.png"
+    class="company-logo"
+    alt="Company Logo"
+  /></a>
+    
+    <div class="navigation-menu">
+      <div class="menu-item">
+        <span class="status-indicator"></span>
+        <a href="#" class="menu-link">About us</a>
+      </div>
+    </div>
+      <div class="auth-section">
+        <button class="login-button" *ngIf="isLoginVisible" (click)="showSignup()"  aria-label="Login" routerLink="LogIn">Log In</button>
+        <button class="login-button" *ngIf="isSignedUp" (click)="showLogin()" aria-label="Sign Up" routerLink="SignUp">Sign Up</button>
+        <button class="login-button" aria-label="Logout" *ngIf="isLoggedIn" (click)="logout()" routerLink="LogIn">Log Out</button>
+      </div>
+  </nav>
