@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATB Monitoring Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
 <body>
     <header class="dashboard-header">
-        <img src="logo.png" alt="Company Logo" class="logo">
-        <h1>ATB Monitoring Dashboard</h1>
-        <div class="status-indicator">
-            <span class="live-pulse"></span>
-            <span class="status-text">System Status: <strong>Operational</strong></span>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span id="theme-icon">🌞</span>
-            </button>
-        </div>
-    </header>
-    
+        <h1> <span id="atb">ATB </span> Monitoring Dashboard</h1>
+    </header>  
     <main class="dashboard-grid">
         <section class="card">
             <h2>Temperature Trends</h2>
@@ -38,39 +20,5 @@
             </ul>
         </section>
     </main>
-    
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle("dark-theme");
-            document.getElementById("theme-icon").textContent = document.body.classList.contains("dark-theme") ? "🌙" : "🌞";
-        }
-        
-        const ctxTemp = document.getElementById('temperatureChart').getContext('2d');
-        new Chart(ctxTemp, {
-            type: 'line',
-            data: {
-                labels: ['12PM', '1PM', '2PM', '3PM', '4PM', '5PM'],
-                datasets: [{
-                    label: 'Temperature (°C)',
-                    data: [23, 24, 26, 25, 27, 28],
-                    borderColor: 'red',
-                    fill: false
-                }]
-            }
-        });
-        
-        const ctxGas = document.getElementById('gasChart').getContext('2d');
-        new Chart(ctxGas, {
-            type: 'bar',
-            data: {
-                labels: ['CO₂ (ppm)', 'O₂ (%)'],
-                datasets: [{
-                    label: 'Gas Levels',
-                    data: [412, 20.9],
-                    backgroundColor: ['blue', 'green']
-                }]
-            }
-        });
-    </script>
 </body>
-</html>  
+ 

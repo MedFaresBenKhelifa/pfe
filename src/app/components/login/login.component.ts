@@ -14,11 +14,19 @@ export class LoginComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
   constructor(private router: Router, private authToggleService: AuthToggleService) {}
-
-  join() {
-    this.authToggleService.setLoggedIn(true); // Show Log Out
-    this.authToggleService.setSignUpVisible(false); // Hide Sign Up
-    this.authToggleService.setLoginVisible(false); // Hide Log In
-    this.router.navigate(['/Dashboard']); // Redirect
+  signUp() {
+    this.authToggleService.setLoggedIn(false);
+    this.authToggleService.setSignUpVisible(false);
+    this.authToggleService.setLoginVisible(true); 
+    this.authToggleService.setNavBar(false);
+    this.router.navigate(['/SignUp']); 
   }
+  join() {
+    this.authToggleService.setLoggedIn(true);
+    this.authToggleService.setSignUpVisible(false);
+    this.authToggleService.setLoginVisible(false); 
+    this.authToggleService.setNavBar(true);
+    this.router.navigate(['/Dashboard']); 
+  }
+
 }

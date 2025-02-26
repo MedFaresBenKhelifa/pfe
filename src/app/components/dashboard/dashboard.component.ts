@@ -1,76 +1,36 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
-interface AccessLog {
-  name: string;
-  time: string;
-  type: string;
-}
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements AfterViewInit, OnInit {
-  isDarkTheme = false;
   temperatureChart: Chart | null = null;
+  gasChart: Chart | null = null;
 
-  ngOnInit() {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  this.isDarkTheme = savedTheme === "dark";
-
-  if (this.isDarkTheme) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    document.body.classList.add("dark-mode");
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-    document.body.classList.remove("dark-mode");
-  }
-
-  document.getElementById("theme-icon")!.textContent = this.isDarkTheme ? "🌙" : "🌞";
-}
-
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.renderTemperatureChart();
     this.renderCO2Chart();
   }
 
- toggleTheme() {
-  this.isDarkTheme = !this.isDarkTheme;
-
-  if (this.isDarkTheme) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    document.body.classList.add("dark-mode"); // Apply dark mode class
-    localStorage.setItem("theme", "dark");
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-    document.body.classList.remove("dark-mode"); // Remove dark mode class
-    localStorage.setItem("theme", "light");
-  }
-
-  document.getElementById("theme-icon")!.textContent = this.isDarkTheme ? "🌙" : "🌞";
-}
-
-
-
   renderTemperatureChart() {
-    // Generate hourly labels dynamically based on current time
     const currentHour = new Date().getHours();
     let labels = [];
-    let startHour = Math.max(10, currentHour - 5); // Start at 10 AM or 5 hours before now
+    let startHour = Math.max(10, currentHour - 5);
 
     for (let i = 0; i < 6; i++) {
       let hour = (startHour + i) % 24;
-      let label = hour < 12 ? `${hour}AM` : (hour === 12 ? `12PM` : `${hour - 12}PM`);
-      labels.push(label);
+      labels.push(hour < 12 ? `${hour}AM` : hour === 12 ? "12PM" : `${hour - 12}PM`);
     }
 
-    let data = [22.5, 23.0, 23.5, 24.0, 24.2, 24.5]; // Example values, replace with actual data
+    let data = [22.5, 23.0, 23.5, 24.0, 24.2, 60];
 
     if (this.temperatureChart) {
-      this.temperatureChart.destroy(); // Destroy previous chart before rendering new
+      this.temperatureChart.destroy();
     }
 
     this.temperatureChart = new Chart('temperatureChart', {
@@ -80,8 +40,8 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         datasets: [{
           label: 'Temperature (°C)',
           data: data,
-          borderColor: 'blue',
-          backgroundColor: 'rgba(0, 0, 255, 0.2)',
+          borderColor: 'rgb(162, 5, 26)',
+          backgroundColor: 'red',
           fill: true
         }]
       },
@@ -90,12 +50,16 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   }
 
   renderCO2Chart() {
-    new Chart('gasChart', {
+    if (this.gasChart) {
+      this.gasChart.destroy();
+    }
+
+    this.gasChart = new Chart('gasChart', {
       type: 'bar',
       data: {
         labels: ['CO₂ (ppm)', 'O₂ (%)'],
         datasets: [{
-          label: 'Gas Levels',
+          label: 'Gas Levels ',
           data: [412, 20.9],
           backgroundColor: ['blue', 'green']
         }]

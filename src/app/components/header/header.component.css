@@ -108,15 +108,6 @@
   color: rgb(162, 5, 26);
 }
 
-.login-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 25vm;
-  fill: rgb(162, 5, 26);
-  filter: drop-shadow(4px 4px 12px rgba(162, 5, 26, 0.5));
-}
-
 
 @media (max-width: 991px) {
   .navigation-bar {
