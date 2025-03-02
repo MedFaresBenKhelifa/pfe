@@ -1,42 +1,51 @@
 <main class="page-container">
   <section class="signup-section">
       <div class="signup">
-          <img src="images/header/logo.png"  class="atb-logo">
-          <h1 class="signup-title">Modifier Mot De Passe</h1>
+          <img src="images/header/logo.png" class="atb-logo" alt="Logo">
+          <h1 class="signup-title">Modifier le Mot de Passe</h1>
           <div class="signup-form">
               <form class="form">
                   <div class="form-line">
-                      <input type="text" placeholder="Mot de Passe actuel" [type]="isPasswordVisible ? 'text' : 'password'"  class="input-group" required>
-                      <button 
-                      type="button" 
-                      (click)="togglePasswordVisibility()" 
-                      class="eye-icon"
-                      aria-label="Toggle password visibility">
-                      <img 
-                        [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
-                        alt="eye icon" 
+                      <input 
+                        type="password" 
+                        placeholder="Mot de passe actuel" 
+                        [type]="isPasswordVisible ? 'text' : 'password'"  
+                        class="input-group" 
+                        required
                       />
-                    </button>
+                      <button 
+                        type="button" 
+                        (click)="togglePasswordVisibility()" 
+                        class="eye-icon"
+                        aria-label="Afficher/Masquer le mot de passe"
+                      >
+                        <img 
+                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
+                          alt="Icône d'œil" 
+                        />
+                      </button>
                   </div>
                   <div class="password-line">
                       <input 
-                        placeholder="Nouveau Mot de Passe " 
+                        type="password" 
+                        placeholder="Nouveau mot de passe" 
                         class="input-group" 
-                        id="password-input" 
+                        id="new-password" 
                         required 
                       />
                   </div>
                   <div class="password-line">
                     <input 
-                      placeholder="Confirmation de Nouveau Mot de Passe " 
+                      type="password" 
+                      placeholder="Confirmer le nouveau mot de passe" 
                       class="input-group" 
-                      id="password-input" 
+                      id="confirm-password" 
                       required 
                     />
                 </div>
               </form>
           </div>
-          <button  class="cta-button">Modifier Mot De Passe</button>
+          <button class="cta-button">Modifier le Mot de Passe</button>
       </div>
   </section>
-</main> 
+</main>

@@ -101,6 +101,9 @@
   padding: 7px 16px;
   transition: background-color 0.2s ease;
 }
+#logout{
+  width: 170px;
+}
 
 .login-button:hover,
 .login-button:focus {

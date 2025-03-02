@@ -1,18 +1,18 @@
 <main class="page-container">
   <section class="signup-section">
       <div class="signup">
-          <img src="images/header/logo.png"  class="tunilanci-logo">
-          <h1 class="signup-title">Sign Up</h1>
+          <img src="images/header/logo.png" class="tunilanci-logo">
+          <h1 class="signup-title">S'inscrire</h1>
           <div class="divider-container" role="separator" aria-orientation="horizontal">
               <div class="divider-line"></div>
-              <div class="divider-text">Create your account</div>
+              <div class="divider-text">Créez votre compte</div>
               <div class="divider-line"></div>
           </div>
           <div class="signup-form">
               <form class="form">
                   <div class="form-line">
-                      <input type="text" placeholder="First Name" class="input-group" name="first-name" required>
-                      <input type="text" placeholder="Last Name" class="input-group" name="last-name" required>
+                      <input type="text" placeholder="Prénom" class="input-group" name="first-name" required>
+                      <input type="text" placeholder="Nom" class="input-group" name="last-name" required>
                   </div>
                   <div class="form-line">
                       <input type="email" placeholder="Email" class="input-group" name="email" required>
@@ -20,7 +20,7 @@
                   <div class="password-line">
                       <input 
                         [type]="isPasswordVisible ? 'text' : 'password'" 
-                        placeholder="Password (8 or more characters)" 
+                        placeholder="Mot de passe (8 caractères ou plus)" 
                         class="input-group" 
                         id="password-input" 
                         required 
@@ -29,50 +29,48 @@
                         type="button" 
                         (click)="togglePasswordVisibility()" 
                         class="eye-icon"
-                        aria-label="Toggle password visibility">
+                        aria-label="Afficher/Masquer le mot de passe">
                         <img 
                           [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
-                          alt="eye icon" 
+                          alt="Icône œil" 
                         />
                       </button>
-
-                    </div>
-                    <div class="form-line">
+                  </div>
+                  <div class="form-line">
                       <input type="file" class="form-control input-group" id="profile-image" (change)="onFileSelected($event)" accept="image/*">
-                    </div>
-                    <div class="image-preview-container">
-                      <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Preview" class="img-thumbnail">
-                    </div>
-                    <div class="radio-group">
-                      <div class="btn-group" role="group" aria-label="Account Type Selection">
-                        <input  type="radio" class="btn-check" name="accountType" id="individual" autocomplete="off" value="individual"  required>
-                        <label id="ss" class="btn btn-outline-primary" for="individual">admin</label>
+                  </div>
+                  <div class="image-preview-container">
+                      <img *ngIf="imagePreview" [src]="imagePreview" alt="Aperçu du profil" class="img-thumbnail">
+                  </div>
+                  <div class="radio-group">
+                      <div class="btn-group" role="group" aria-label="Sélection du type de compte">
+                        <input type="radio" class="btn-check" name="accountType" id="individual" autocomplete="off" value="individual" required>
+                        <label id="ss" class="btn btn-outline-primary" for="individual">Administrateur</label>
                     
-                        <input type="radio" class="btn-check" name="accountType" id="business" autocomplete="off" value="business" >
-                        <label class="btn btn-outline-primary" for="business">employe</label>
-                  
+                        <input type="radio" class="btn-check" name="accountType" id="business" autocomplete="off" value="business">
+                        <label class="btn btn-outline-primary" for="business">Employé</label>
                       </div>
-                    </div>
-                    <div class="agreement-section">
+                  </div>
+                  <div class="agreement-section">
                       <input type="checkbox" id="agreement" class="checkbox" />
                       <label for="agreement" class="agreement-text">
-                        I understand and agree to the
-                        <span class="highlighted-text"> Terms of Service</span>,
-                        including the
-                        <span class="highlighted-text">Privacy Policy</span>.
+                        Je comprends et j'accepte les
+                        <span class="highlighted-text">Conditions d'utilisation</span>,
+                        y compris la
+                        <span class="highlighted-text">Politique de confidentialité</span>.
                       </label>
-                    </div>
+                  </div>
               </form>
           </div>
           <button class="cta-button">
-              <span>Join</span>
+              <span>Rejoindre</span>
           </button>
           <div class="question">
-              <p>Having an account?</p>
+              <p>Vous avez déjà un compte ?</p>
           </div>
           <div>
-              <a href="#" class="login-link">Login</a>
+              <a href="#" class="login-link">Se connecter</a>
           </div>
       </div>
   </section>
-</main> 
+</main>
