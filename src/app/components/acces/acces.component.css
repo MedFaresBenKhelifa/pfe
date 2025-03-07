@@ -1,0 +1,143 @@
+* {
+  font-family: Georgia, serif;
+}
+
+:host {
+  display: contents;
+}
+
+.page-container {
+  margin-top: 8vw;
+  margin-bottom: 8vw;
+  margin-left: auto;
+}
+
+.signup-section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10vw;
+  flex-wrap: nowrap;
+  padding: 20px 0;
+}
+
+.signup {
+  border-radius: 24px;
+  border: 2.5px solid #b5b5b5;
+  background: linear-gradient(155deg, rgba(181, 181, 181, 0.25) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(228, 228, 228, 0.25) 100%);
+  backdrop-filter: blur(100px);
+  padding: 35px 50px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
+}
+
+.signup-title {
+  margin-top: 10px;
+  color: rgb(162, 5, 26);
+  font-size: 2.5vw;
+  line-height: 1.2;
+}
+
+.signup-form {
+  margin-top: 10px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border-radius: 59px;
+  background-color: rgba(255, 255, 255, 1);
+  min-height: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  border: 3px #e4e4e4;
+  font-size: 1vw;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 2px 2px 6px rgba(162, 5, 26, 0.3);
+}
+
+.hour-selection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.hour-selection input {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cta-button {
+  text-shadow: 2px 2px 8px rgba(162, 5, 26, 0.5);
+  border-radius: 43px;
+  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
+  background-color: rgb(162, 5, 26);
+  margin-top: 25px;
+  font-size: 1.2vw;
+  font-weight: 400;
+  color: #e4e4e4;
+  padding: 8px 20px;
+  border: 2px solid rgb(162, 5, 26);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.atb-logo {
+  aspect-ratio: 4;
+  width: 30px;
+  height: 30px;
+}
+.cta-button:hover {
+  background-color: transparent;
+  color: rgb(162, 5, 26);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+  .signup-section {
+    flex-direction: column;
+    gap: 5vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .signup {
+    width: 80%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-title {
+    font-size: 5vw;
+  }
+
+  .input-group {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .signup {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .signup-title {
+    font-size: 6vw;
+  }
+
+  .cta-button {
+    font-size: 3vw;
+  }
+}

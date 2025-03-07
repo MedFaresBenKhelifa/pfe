@@ -5,6 +5,7 @@ import { signupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChangerMdpComponent } from './components/changer-mdp/changer-mdp.component';
 import { DemandeComponent } from './components/demande/demande.component';
+import { AccesComponent } from './components/acces/acces.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'LogIn', pathMatch: 'full' },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path : 'Dashboard', component: DashboardComponent},
   { path : 'Demande', component: DemandeComponent},
   { path : 'change', component: ChangerMdpComponent},
+  { path : 'acces', component: AccesComponent},
   { path: '**', component: LoginComponent },
 ];
 
