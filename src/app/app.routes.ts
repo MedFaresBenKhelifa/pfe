@@ -6,6 +6,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChangerMdpComponent } from './components/changer-mdp/changer-mdp.component';
 import { DemandeComponent } from './components/demande/demande.component';
 import { AccesComponent } from './components/acces/acces.component';
+import { VerifComponent } from './components/verif/verif.component';
+import { CodeComponent } from './components/code/code.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'LogIn', pathMatch: 'full' },
@@ -15,6 +17,8 @@ export const routes: Routes = [
   { path : 'Demande', component: DemandeComponent},
   { path : 'change', component: ChangerMdpComponent},
   { path : 'acces', component: AccesComponent},
+  { path: 'verif', component: VerifComponent },
+  { path: 'code', component: CodeComponent },
   { path: '**', component: LoginComponent },
 ];
 

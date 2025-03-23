@@ -15,27 +15,11 @@
 th, td {
   vertical-align: middle !important;
 }
-
-.btn-group {
-  display: flex;
-
-  justify-content: center;
+.btn-danger{
+  margin-left: 10px;
 }
-
-.btn {
-  width: 30px;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-.btn-success {
-  background-color: #28a745;
-  border: none;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  border: none;
+.btn{
+  width: 100px;
 }
 
 .btn:hover {

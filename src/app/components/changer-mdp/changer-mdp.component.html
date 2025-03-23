@@ -5,26 +5,6 @@
           <h1 class="signup-title">Modifier le Mot de Passe</h1>
           <div class="signup-form">
               <form class="form">
-                  <div class="form-line">
-                      <input 
-                        type="password" 
-                        placeholder="Mot de passe actuel" 
-                        [type]="isPasswordVisible ? 'text' : 'password'"  
-                        class="input-group" 
-                        required
-                      />
-                      <button 
-                        type="button" 
-                        (click)="togglePasswordVisibility()" 
-                        class="eye-icon"
-                        aria-label="Afficher/Masquer le mot de passe"
-                      >
-                        <img 
-                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
-                          alt="Icône d'œil" 
-                        />
-                      </button>
-                  </div>
                   <div class="password-line">
                       <input 
                         type="password" 
@@ -45,7 +25,7 @@
                 </div>
               </form>
           </div>
-          <button class="cta-button">Modifier le Mot de Passe</button>
+          <button (click)="backToLogin()" class="cta-button">Modifier le Mot de Passe</button>
       </div>
   </section>
 </main>

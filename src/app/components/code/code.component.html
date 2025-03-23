@@ -1,0 +1,23 @@
+<main class="page-container">   
+  <section class="signup-section">       
+      <div class="signup">           
+          <img src="images/header/logo.png" class="atb-logo" alt="Logo">            
+          <h1 class="signup-title">Vérification du Code</h1>           
+          <div class="signup-form">               
+              <form class="form">                   
+                  <div class="password-line">                       
+                      <input 
+                          type="text" 
+                          placeholder="Entrez le code de vérification reçu par email" 
+                          class="input-group" 
+                          id="verification-code" 
+                          required 
+                          maxlength="6"
+                      />                   
+                  </div>               
+              </form>           
+          </div>           
+          <button (click)="verifCode()" class="cta-button">Valider le Code</button>       
+      </div>   
+  </section> 
+</main>
