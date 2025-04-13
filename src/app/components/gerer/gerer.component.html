@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-striped custom-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Décision</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let user of users; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ user.nom }}</td>
+      <td>{{ user.prenom }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button type="button" class="btn btn-success" (click)="openModal(user)">Modifier</button>
+        <button type="button" class="btn btn-danger">Supprimer</button>
+      </td>
+    </tr>
+    
+    <!-- Show Modal -->
+    <app-user-edit-modal
+    [visible]="showModal"
+    [userData]="selectedUser"
+    (close)="closeModal()"
+    (save)="saveChanges($event)">
+  </app-user-edit-modal>
+
+    
+  </table>
+</div>

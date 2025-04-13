@@ -17,20 +17,34 @@ th, td {
 }
 .btn-danger{
   margin-left: 10px;
+  background: rgb(162, 5, 26);
+  color: white;
+  border: 1px solid rgb(162, 5, 26);
+}
+.btn-danger:hover {
+  background-color: #ffffff;
+  color: rgb(162, 5, 26);
 }
 .btn{
   width: 100px;
 }
-
-.btn:hover {
-  opacity: 0.85;
+.btn-success{
+  background: rgba(21,115,71,255);
+  color: white;
+  border: 1px solid rgba(21,115,71,255);
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f8f9fa;
+.btn-success:hover {
+  color: rgba(21,115,71,255);
+  background-color:#ffffff;
 }
+
 
 * {
   text-align: center;
   font-family:  Georgia , serif;
+}
+td{
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

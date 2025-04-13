@@ -1,0 +1,135 @@
+/* Modal backdrop - fixed position covering entire viewport */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Fixed from 'bottom: 2000' */
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+/* Active modal state */
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  position: relative; /* Ensures no extra layers */
+  z-index: 1; /* Explicit stacking */
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem;
+  position: relative;
+}
+
+  .modal.show .modal-content {
+    transform: translateY(0);
+  }
+
+  /* Modal header */
+  .modal-header {
+    padding: 1.2rem 1.5rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  /* Close button */
+  .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.2s;
+  }
+
+  .btn-close:hover {
+    color: #333;
+  }
+
+  /* Modal body */
+  .modal-body {
+    text-align: left;
+    padding: 1.5rem;
+  
+  }
+
+  /* Form inputs */
+  .form-control {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: rgb(162, 5, 26);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(162, 5, 26, 0.399);
+  }
+
+  /* Modal footer */
+  .modal-footer {
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary {
+    background: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+  }
+
+  .btn-secondary:hover {
+    background: #5a6268;
+    border-color: #545b62;
+  }
+
+  .btn-primary {
+    background: rgb(162, 5, 26);
+    color: white;
+    border: 1px solid rgb(162, 5, 26);
+  }
+
+  .btn-primary:hover {
+    background-color: #ffffff;
+    color: rgb(162, 5, 26);
+  }

@@ -4,16 +4,25 @@
           <img src="images/header/logo.png" class="tunilanci-logo">
           <h1 class="signup-title">Se connecter</h1>
           <div class="signup-form">
-              <form class="form">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
                   <div class="form-line">
-                      <input type="text" placeholder="Email ou Nom d'utilisateur" class="input-group" name="email" required>
+                      <input 
+                        type="text" 
+                        placeholder="Email ou Nom d'utilisateur" 
+                        class="input-group" 
+                        formControlName="email"
+                        required>
+                      <span *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+                        Email est invalid
+                      </span>
                   </div>
-                  <div class="password-line">
+                  <div class="form-line">
+                    <div class="input-with-icon">
                       <input 
                         [type]="isPasswordVisible ? 'text' : 'password'" 
                         placeholder="Mot de passe" 
                         class="input-group" 
-                        id="password-input" 
+                        formControlName="password"
                         required 
                       />
                       <button 
@@ -26,22 +35,26 @@
                           alt="Icône œil" 
                         />
                       </button>
+                    </div>
+                      <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                        Mot de passe est invalid
+                      </span>
                   </div>
                   <a href="/verif" class="forget-password">Mot de passe oublié ?</a>
                   <div class="agreement-section">
-                      <input type="checkbox" id="agreement" class="checkbox" />
+                      <input type="checkbox" id="agreement" class="checkbox" formControlName="rememberMe" />
                       <label for="agreement" class="agreement-text">
                         <span>Se souvenir de moi</span>
                       </label>
                   </div>
+                  <button type="submit" (click)="join()" class="cta-button">Se connecter</button>
               </form>
           </div>
-          <button class="cta-button" (click)="join()">Se connecter</button>
           <div class="divider-container" role="separator" aria-orientation="horizontal">
             <div class="divider-line"></div>
             <div class="divider-text">Vous n'avez pas de compte ?</div>
             <div class="divider-line"></div>
-        </div>
+          </div>
           <div>
             <a (click)="signUp()" class="login-link">S'inscrire</a>
           </div>
