@@ -48,3 +48,28 @@ td{
   padding-top: 10px;
   padding-bottom: 10px;
 }
+/* Remove all shadows from search components */
+.search-container .form-control,
+.search-container .btn {
+  box-shadow: none !important;
+}
+
+/* Make search input smaller */
+.search-container .form-control {
+  height: 40px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Make search button smaller to match */
+.search-container .btn {
+  padding: 0.25rem 0.75rem;
+  height: 40px;
+  width: 120px;
+}
+
+/* Optional: Add subtle border on focus */
+.search-container .form-control:focus {
+  border-color: rgb(162, 5, 26);
+  outline: 0;
+}
