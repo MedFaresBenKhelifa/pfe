@@ -4,7 +4,7 @@
         <h5 class="modal-title">Modifier Utilisateur</h5>
         <button type="button" class="btn-close" (click)="closeModal()"></button>
       </div>
-      <div class="modal-body">
+      <div *ngIf="userData"class="modal-body">
         <label>Nom:</label>
         <input [(ngModel)]="userData.nom" class="form-control" />
       

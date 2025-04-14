@@ -1,33 +1,51 @@
 <div class="container">
-  <table class="table table-striped custom-table">
+  <!-- Add search-container class to the parent div -->
+  <div class="mb-3 search-container" style="max-width: 400px;">
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Search employees..." 
+        [(ngModel)]="searchTerm"
+        (input)="applyFilter()"
+      >
+    </div>
+  </div>
+
+  
+  <!-- Employees Table -->
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>#</th>
         <th>Nom</th>
         <th>Prénom</th>
         <th>Email</th>
-        <th>Décision</th>
+        <th>Actions</th>
       </tr>
     </thead>
-    <tr *ngFor="let user of users; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ user.nom }}</td>
-      <td>{{ user.prenom }}</td>
-      <td>{{ user.email }}</td>
-      <td>
-        <button type="button" class="btn btn-success" (click)="openModal(user)">Modifier</button>
-        <button type="button" class="btn btn-danger">Supprimer</button>
-      </td>
-    </tr>
-    
-    <!-- Show Modal -->
-    <app-user-edit-modal
-    [visible]="showModal"
+    <tbody>
+      <tr *ngFor="let user of filteredUsers; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="openModal(user)">Modifier</button>
+          <button type="button" class="btn btn-danger" (click)="deleteUser(i)">Supprimer</button>
+        </td>
+      </tr>
+      <tr *ngIf="filteredUsers.length === 0">
+        <td colspan="5" class="text-center">No employees found</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Edit Modal -->
+  <app-user-edit-modal
+    [isVisible]="showModal"
     [userData]="selectedUser"
     (close)="closeModal()"
     (save)="saveChanges($event)">
   </app-user-edit-modal>
-
-    
-  </table>
 </div>

@@ -1,27 +1,34 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-edit-modal',
-  standalone: true, // Mark as standalone
-  imports: [FormsModule], // Add FormsModule here
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './user-edit-modal.component.html',
-  styleUrl: './user-edit-modal.component.css'
+  styleUrls: ['./user-edit-modal.component.css']
 })
 export class UserEditModalComponent {
-  @Input() userData: any;
-  @Output() close = new EventEmitter<void>();
-  @Output() save = new EventEmitter<any>();
-  isVisible = false;
-
+  private _userData: any = null;
+  
   @Input() 
-  set visible(value: boolean) {
-    this.isVisible = value;
+  set userData(value: any) {
+    this._userData = value ? {...value} : null;
+  }
+  get userData(): any {
+    return this._userData;
   }
 
+  @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<any>();
+
+  @Input() isVisible = false;
 
   saveChanges() {
-    this.save.emit(this.userData);
+    if (this.userData) {
+      this.save.emit({...this.userData});
+    }
   }
 
   closeModal() {
