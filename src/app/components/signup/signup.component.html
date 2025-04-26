@@ -1,77 +1,102 @@
 <main class="page-container">
   <section class="signup-section">
-      <div class="signup">
-          <img src="images/header/logo.png" class="tunilanci-logo">
-          <h1 class="signup-title">S'inscrire</h1>
-          <div class="divider-container" role="separator" aria-orientation="horizontal">
-              <div class="divider-line"></div>
-              <div class="divider-text">Créez votre compte</div>
-              <div class="divider-line"></div>
-          </div>
-          <div class="signup-form">
-              <form class="form">
-                  <div class="form-line">
-                      <input type="text" placeholder="Prénom" class="input-group" name="first-name" required>
-                      <input type="text" placeholder="Nom" class="input-group" name="last-name" required>
-                  </div>
-                  <div class="form-line">
-                      <input type="email" placeholder="Email" class="input-group" name="email" required>
-                  </div>
-                  <div class="password-line">
-                      <input 
-                        [type]="isPasswordVisible ? 'text' : 'password'" 
-                        placeholder="Mot de passe (8 caractères ou plus)" 
-                        class="input-group" 
-                        id="password-input" 
-                        required 
-                      />
-                      <button 
-                        type="button" 
-                        (click)="togglePasswordVisibility()" 
-                        class="eye-icon"
-                        aria-label="Afficher/Masquer le mot de passe">
-                        <img 
-                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
-                          alt="Icône œil" 
-                        />
-                      </button>
-                  </div>
-                  <!--
-                  <div class="form-line">
-                      <input type="file" class="form-control input-group" id="profile-image" (change)="onFileSelected($event)" accept="image/*">
-                  </div>
-                  <div class="image-preview-container">
-                      <img *ngIf="imagePreview" [src]="imagePreview" alt="Aperçu du profil" class="img-thumbnail">
-                  </div>
-                  <div class="radio-group">
-                      <div class="btn-group" role="group" aria-label="Sélection du type de compte">
-                        <input type="radio" class="btn-check" name="accountType" id="individual" autocomplete="off" value="individual" required>
-                        <label id="ss" class="btn btn-outline-primary" for="individual">Administrateur</label>
-                    
-                        <input type="radio" class="btn-check" name="accountType" id="business" autocomplete="off" value="business">
-                        <label class="btn btn-outline-primary" for="business">Employé</label>
-                      </div>
-                  </div>-->
-                  <div class="agreement-section">
-                      <input type="checkbox" id="agreement" class="checkbox" />
-                      <label for="agreement" class="agreement-text">
-                        Je comprends et j'accepte les
-                        <span class="highlighted-text">Conditions d'utilisation</span>,
-                        y compris la
-                        <span class="highlighted-text">Politique de confidentialité</span>.
-                      </label>
-                  </div>
-              </form>
-          </div>
-          <button class="cta-button">
-              <span>Rejoindre</span>
-          </button>
-          <div class="question">
-              <p>Vous avez déjà un compte ?</p>
-          </div>
-          <div>
-              <a href="#" class="login-link">Se connecter</a>
-          </div>
+    <div class="signup">
+      <img src="images/header/logo.png" class="tunilanci-logo" alt="Logo de l'entreprise">
+      <h1 class="signup-title">S'inscrire</h1>
+
+      <div class="divider-container" role="separator" aria-orientation="horizontal">
+        <div class="divider-line"></div>
+        <div class="divider-text">Créez votre compte</div>
+        <div class="divider-line"></div>
       </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="signup-form">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
+          <div class="form-line">
+            <input 
+              type="text" 
+              formControlName="firstName"
+              placeholder="Prénom" 
+              class="input-group" 
+              required>
+            <input 
+              type="text" 
+              formControlName="lastName"
+              placeholder="Nom" 
+              class="input-group" 
+              required>
+          </div>
+
+          <div class="form-line">
+            <input 
+              type="email" 
+              formControlName="email"
+              placeholder="Email" 
+              class="input-group" 
+              required>
+            <span class="text-danger" *ngIf="signupForm.controls.email?.invalid && signupForm.controls.email?.touched">
+              Email est invalide
+            </span>
+          </div>
+
+          <div class="password-line">
+            <div class="input-with-icon">
+              <input 
+                [type]="isPasswordVisible ? 'text' : 'password'"
+                formControlName="password"
+                id="signupPassword"
+                placeholder="Mot de passe (8 caractères ou plus)" 
+                class="input-group" 
+                required>
+              <button 
+                type="button" 
+                (click)="togglePasswordVisibility()" 
+                class="eye-icon"
+                aria-label="Afficher/Masquer le mot de passe">
+                <img [src]="isPasswordVisible ? 'images/signup/view.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
+              </button>
+            </div>
+            <span class="text-danger" *ngIf="signupForm.controls.password?.invalid && signupForm.controls.password?.touched">
+              Mot de passe doit contenir au moins 8 caractères
+            </span>
+          </div>
+
+          <div class="agreement-section">
+            <input 
+              type="checkbox" 
+              id="acceptTerms" 
+              formControlName="acceptTerms"
+              class="checkbox" 
+              required>
+            <label for="acceptTerms" class="agreement-text">
+              Je comprends et j'accepte les
+              <span class="highlighted-text">Conditions d'utilisation</span>,
+              y compris la
+              <span class="highlighted-text">Politique de confidentialité</span>.
+            </label>
+          </div>
+
+          <button type="submit" class="cta-button" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Rejoindre</span>
+            <span *ngIf="isLoading">En cours...</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="question">
+        <p>Vous avez déjà un compte ?</p>
+      </div>
+      <div>
+        <a routerLink="/login" class="login-link">Se connecter</a>
+      </div>
+    </div>
   </section>
 </main>

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -6,15 +6,27 @@ import Chart from 'chart.js/auto';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
+export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
   temperatureChart: Chart | null = null;
   gasChart: Chart | null = null;
+  private intervalId: any;
 
   ngOnInit() {}
 
   ngAfterViewInit() {
     this.renderTemperatureChart();
     this.renderCO2Chart();
+    // 🔥 Démarrer l'interval pour update les données toutes les 10s
+    this.intervalId = setInterval(() => {
+      this.updateChartsRandomly();
+    }, 10000); // 10 000 ms = 10 sec
+  }
+
+  ngOnDestroy() {
+    // Nettoyer l'interval quand le composant est détruit
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   renderTemperatureChart() {
@@ -27,8 +39,6 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       labels.push(hour < 12 ? `${hour}AM` : hour === 12 ? "12PM" : `${hour - 12}PM`);
     }
 
-    let data = [22.5, 23.0, 23.5, 24.0, 24.2, 60];
-
     if (this.temperatureChart) {
       this.temperatureChart.destroy();
     }
@@ -39,7 +49,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         labels: labels,
         datasets: [{
           label: 'Temperature (°C)',
-          data: data,
+          data: this.generateRandomTemperatures(),
           borderColor: 'rgb(162, 5, 26)',
           backgroundColor: 'red',
           fill: true
@@ -59,12 +69,41 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       data: {
         labels: ['CO₂ (ppm)', 'O₂ (%)'],
         datasets: [{
-          label: 'Gas Levels ',
-          data: [412, 20.9],
+          label: 'Gas Levels',
+          data: this.generateRandomGasLevels(),
           backgroundColor: ['blue', 'green']
         }]
       },
       options: { responsive: true }
     });
+  }
+
+  // 🔥 Mettre à jour les données aléatoires
+  updateChartsRandomly() {
+    if (this.temperatureChart && this.temperatureChart.data.datasets[0]) {
+      this.temperatureChart.data.datasets[0].data = this.generateRandomTemperatures();
+      this.temperatureChart.update();
+    }
+
+    if (this.gasChart && this.gasChart.data.datasets[0]) {
+      this.gasChart.data.datasets[0].data = this.generateRandomGasLevels();
+      this.gasChart.update();
+    }
+  }
+
+  // 🔥 Générer des températures aléatoires
+  generateRandomTemperatures(): number[] {
+    const temps: number[] = [];
+    for (let i = 0; i < 6; i++) {
+      temps.push(Number((Math.random() * 10 + 20).toFixed(1))); // entre 20°C et 30°C
+    }
+    return temps;
+  }
+
+  // 🔥 Générer des niveaux de gaz aléatoires
+  generateRandomGasLevels(): number[] {
+    const co2 = Math.floor(Math.random() * 200 + 300); // entre 300 et 500 ppm
+    const o2 = Number((Math.random() * 5 + 19).toFixed(1)); // entre 19% et 24%
+    return [co2, o2];
   }
 }

@@ -1,67 +1,84 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthToggleService } from '../../services/auth-toggle.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { RouterLink, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AuthToggleService } from '../../services/auth-toggle.service';
 @Component({
-  selector: 'app-login',
-  imports: [ReactiveFormsModule,CommonModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  isPasswordVisible: boolean = false;
-  loginForm: FormGroup;
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', Validators.required),
+    rememberMe: new FormControl(false)
+  });
 
-  constructor(
-    private router: Router, 
-    private authToggleService: AuthToggleService,
-    private fb: FormBuilder
+  isPasswordVisible = false;
+  isLoading = false;
+  errorMessage = '';
+
+  constructor(private http: HttpClient, private router: Router
+    ,   private authToggleService: AuthToggleService ,
+
   ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      rememberMe: [false]
-    });
+    
   }
 
-  togglePasswordVisibility(): void {
+  togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
-  onSubmit(){}
-  signUp() {
-    this.authToggleService.setLoggedIn(false);
-    this.authToggleService.setSignUpVisible(false);
-    this.authToggleService.setLoginVisible(true); 
-    this.authToggleService.setNavBar(false);
-    this.router.navigate(['/SignUp']); 
-  }
 
-  join() {
+  onSubmit() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       this.authToggleService.setLoggedIn(true);
       this.authToggleService.setSignUpVisible(false);
       this.authToggleService.setLoginVisible(false); 
       this.authToggleService.setNavBar(true);
       this.router.navigate(['/Dashboard']); 
-      
-      // You can access form values like this:
-      console.log('Email:', this.loginForm.value.email);
-      console.log('Password:', this.loginForm.value.password);
-      console.log('Remember Me:', this.loginForm.value.rememberMe);
+      this.errorMessage = '';
+
+      const { email, password } = this.loginForm.value;
+
+      this.http.post('http://localhost:8000/api/login/', 
+        { email, password },
+        { 
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': this.getCookie('csrftoken') || ''
+          }
+        }
+      ).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.errorMessage = response.error || "Erreur de connexion";
+          }
+        },
+        error: (err) => {
+          console.error("Login error:", err);
+          this.errorMessage = err.error?.error || "Une erreur est survenue lors de la connexion";
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
-      // Mark all fields as touched to show validation errors
       this.loginForm.markAllAsTouched();
     }
   }
 
-  // Helper methods for easy access in template
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
+  private getCookie(name: string): string | null {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [key, value] = cookie.trim().split('=');
+      if (key === name) return decodeURIComponent(value);
+    }
+    return null;
   }
 }
