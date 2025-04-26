@@ -24,8 +24,8 @@
   </div>
 
   <div class="auth-section">
-    <button class="login-button" *ngIf="isLoginVisible" (click)="showSignup()" aria-label="Connexion" routerLink="LogIn">Se connecter</button>
-    <button class="login-button" *ngIf="isSignedUp" (click)="showLogin()" aria-label="Inscription" routerLink="SignUp">S'inscrire</button>
-    <button class="login-button" id="logout" aria-label="Déconnexion" *ngIf="isLoggedIn" (click)="logout()" routerLink="LogIn">Se déconnecter</button>
+    <button class="login-button" *ngIf="isLoginVisible" (click)="showSignup()" aria-label="Connexion" routerLink="login">Se connecter</button>
+    <button class="login-button" *ngIf="isSignedUp" (click)="showLogin()" aria-label="Inscription" routerLink="signup">S'inscrire</button>
+    <button class="login-button" id="logout" aria-label="Déconnexion" *ngIf="isLoggedIn" (click)="logout()" routerLink="login">Se déconnecter</button>
   </div>
 </nav>

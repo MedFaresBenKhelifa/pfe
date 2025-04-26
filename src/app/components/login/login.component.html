@@ -1,22 +1,19 @@
 <main class="page-container">
   <section class="signup-section">
     <div class="signup">
-      <img src="images/header/logo.png" class="atb-logo" alt="Logo de l'entreprise">
-      <h1 class="login-title">Se connecter</h1>
+      <img src="images/header/logo.png" class="tunilanci-logo" alt="Logo de l'entreprise">
+      <h1 class="signup-title">Se connecter</h1>
 
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-      <div class="login-form">
+      <div class="signup-form">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
           <div class="form-line">
-            <div class="input-container">
-              <input type="text" formControlName="email" placeholder="Email" class="input-group" required>
-              <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
-                Email ou nom d'utilisateur invalide
-              </span>
-            </div>
+            <input type="text" formControlName="email" placeholder="Email ou Nom d'utilisateur" class="input-group" required>
+            <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
+              Email ou nom d'utilisateur invalide
+            </span>
           </div>
-          
 
           <div class="form-line">
             <div class="input-with-icon">
@@ -29,9 +26,33 @@
               Mot de passe est invalide
             </span>
           </div>
-          <div>
-            <a (click)="signUp()" class="login-link">S'inscrire</a>
+
+          <a [routerLink]="'/verif'" class="forget-password">Mot de passe oublié ?</a>
+
+
+          <div class="agreement-section">
+            <input type="checkbox" id="rememberMe" formControlName="rememberMe" class="checkbox">
+            <label for="rememberMe" class="agreement-text">
+              <span>Se souvenir de moi</span>
+            </label>
           </div>
+
+          <button type="submit" class="cta-button" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Se connecter</span>
+            <span *ngIf="isLoading">Connexion...</span>
+          </button>
+        </form>
       </div>
+
+      <div class="divider-container" role="separator" aria-orientation="horizontal">
+        <div class="divider-line"></div>
+        <div class="divider-text">Vous n'avez pas de compte ?</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div>
+        <a routerLink="/signup" class="login-link">S'inscrire</a>
+      </div>
+    </div>
   </section>
 </main>
