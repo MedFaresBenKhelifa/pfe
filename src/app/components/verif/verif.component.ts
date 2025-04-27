@@ -10,6 +10,6 @@ import { Router } from '@angular/router';
 export class VerifComponent {
 constructor(private router: Router) {}
   getVerif() {
-    this.router.navigate(['/Code']); 
+    this.router.navigate(['/code']); 
   }
 }
