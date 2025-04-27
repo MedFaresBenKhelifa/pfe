@@ -27,8 +27,7 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.renderTemperatureChart();
+    if (isPlatformBrowser(this.platformId)) {this.renderTemperatureChart();
       this.renderCO2Chart();
       this.intervalId = setInterval(() => {
         this.updateChartsRealTime();
@@ -37,12 +36,22 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
   }
 
   renderTemperatureChart() {
+
+
+
+
+
+
+
+
+
     if (this.temperatureChart) {
       this.temperatureChart.destroy();
     }
@@ -144,6 +153,7 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
     }, 8000);
   }
   
+
 
   generateRandomTemperatures(): number[] {
     const temps: number[] = [];

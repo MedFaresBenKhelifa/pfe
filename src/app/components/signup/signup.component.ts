@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AuthToggleService } from '../../services/auth-toggle.service';
 
 @Component({
   standalone: true,
@@ -26,7 +27,8 @@ export class SignupComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private authToggleService: AuthToggleService ,
   ) {}
 
   togglePasswordVisibility() {
@@ -50,7 +52,11 @@ export class SignupComponent {
         next: (response: any) => {
           this.successMessage = 'Compte créé avec succès';
           setTimeout(() => {
-            this.router.navigate(['/dashboard/']);
+            this.authToggleService.setLoggedIn(true);
+            this.authToggleService.setSignUpVisible(false);
+            this.authToggleService.setLoginVisible(false); 
+            this.authToggleService.setNavBar(true);
+            this.router.navigate(['/Dashboard/']);
           }, 2000);
         },
         error: (error: any) => {

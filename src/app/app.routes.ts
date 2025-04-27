@@ -4,22 +4,22 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChangerMdpComponent } from './components/changer-mdp/changer-mdp.component';
 import { AjoutComponent } from './components/ajout/ajout.component';
-import { NgModel } from '@angular/forms';
+
 import { NgModule } from '@angular/core';
 import { GererComponent } from './components/gerer/gerer.component';
 import { CodeComponent } from './components/code/code.component';
 import { VerifComponent } from './components/verif/verif.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'change', component: ChangerMdpComponent }, // Assurez-vous que le composant existe
+  { path: 'LogIn', component: LoginComponent },
+  { path: 'SignUp', component: SignupComponent },
+  { path: 'Change', component: ChangerMdpComponent }, // Assurez-vous que le composant existe
   { path: 'Dashboard', component: DashboardComponent },
   { path: 'Ajout', component: AjoutComponent },
-  { path: 'gerer', component: GererComponent },
-  { path: 'code', component: CodeComponent },
-  { path: 'verif', component: VerifComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: 'Gerer', component: GererComponent },
+  { path: 'Code', component: CodeComponent },
+  { path: 'Verif', component: VerifComponent },
+  { path: '', redirectTo: 'LogIn', pathMatch: 'full' }
 ];
 @NgModule({
   imports:[RouterModule.forRoot(routes)],
