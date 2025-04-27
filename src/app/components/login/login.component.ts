@@ -45,11 +45,39 @@ export class LoginComponent {
       this.authToggleService.setLoginVisible(false); 
       this.authToggleService.setNavBar(true);
       this.router.navigate(['/Dashboard']); 
-      
-      // You can access form values like this:
-      console.log('Email:', this.loginForm.value.email);
-      console.log('Password:', this.loginForm.value.password);
-      console.log('Remember Me:', this.loginForm.value.rememberMe);
+      this.errorMessage = '';
+
+      const { email, password } = this.loginForm.value;
+
+      this.http.post('http://localhost:8000/api/login/', 
+        { email, password },
+        { 
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': this.getCookie('csrftoken') || ''
+          }
+        }
+      ).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.errorMessage = response.error || "Erreur de connexion";
+          }
+        },
+        error: (err) => {
+          console.error("Login error:", err);
+          this.errorMessage = err.error?.error || "Une erreur est survenue lors de la connexion";
+          this.isLoading = false;
+          // this.authToggleService.setNavBar(false);
+          // this.authToggleService.setLoggedIn(false);
+          // this.authToggleService.setSignUpVisible(true);
+          // this.authToggleService.setLoginVisible(false);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
       // Mark all fields as touched to show validation errors
       this.loginForm.markAllAsTouched();

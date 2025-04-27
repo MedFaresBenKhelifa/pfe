@@ -10,13 +10,10 @@ import { AjoutComponent } from './components/ajout/ajout.component';
 import { GererComponent } from './components/gerer/gerer.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'LogIn', pathMatch: 'full' },
-  { path: 'LogIn', component: LoginComponent },
-  { path: 'SignUp', component: signupComponent },
-  { path : 'Dashboard', component: DashboardComponent},
-  { path : 'change', component: ChangerMdpComponent},
-  { path: 'verif', component: VerifComponent },
-  { path: 'code', component: CodeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'change', component: ChangerMdpComponent }, // Assurez-vous que le composant existe
+  { path: 'Dashboard', component: DashboardComponent },
   { path: 'Ajout', component: AjoutComponent },
   { path: 'gerer', component: GererComponent },
   { path: '**', component: LoginComponent },

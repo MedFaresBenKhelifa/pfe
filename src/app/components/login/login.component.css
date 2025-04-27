@@ -1,33 +1,27 @@
 * {
-  font-family:  Georgia , serif;
+  font-family: Georgia, serif;
 }
 
 :host {
   display: contents;
 }
 
+/* Layout */
 .page-container {
-  margin-top: 8vw;
-  margin-bottom: 8vw;
-  margin-left: auto;
-}
-
-.illustrator {
-  width: 30vw;
+  margin: 5vw 0;
 }
 
 .signup-section {
   display: flex;
-  width: 100%;
-  align-items: center;
   justify-content: center;
-  gap: 10vw;
-  font-family: Neulis Alt, sans-serif;
-  flex-wrap: nowrap;
-  padding: 20px 0;
+  align-items: center;
+  padding: 50px 0; /* Less padding */
+  width: 100%;
 }
 
 .signup {
+  width: 500px;
+  padding: 35px 50px;
   border-radius: 24px;
   border: 2.5px solid var(--Cards-Stroke);
   background: linear-gradient(
@@ -37,8 +31,6 @@
     rgba(228, 228, 228, 0.25) 100%
   );
   backdrop-filter: blur(100px);
-  padding: 35px 50px;
-  width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,105 +38,101 @@
   box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
 }
 
-.tunilanci-logo {
-  aspect-ratio: 4;
+/* Images and Logos */
+.atb-logo {
   width: 30px;
   height: 30px;
+  margin-bottom: 10px;
 }
 
-.signup-title {
-  margin-top: 10px;
+/* Typography */
+.login-title {
+  font-size: 1.8rem;
   color: rgb(162, 5, 26);
-  font-size: 2.5vw;
-  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .divider-container {
-  margin-top: 20px;
-  min-width: 90%;
   display: flex;
   align-items: center;
-  gap: 8px;
   justify-content: center;
-  font: 400 16px/1.2 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
+  margin: 15px 0;
+  width: 100%;
+  gap: 8px;
 }
 
 .divider-line {
-  background-color: var(--Black, #0d0d0d);
+  flex: 1;
   height: 2px;
-  flex: 0;
-  flex-basis: 20%;
+  background-color: #0d0d0d;
 }
 
 .divider-text {
-  color: var(--Black, #0d0d0d);
-  text-align: center;
-  font-size: 1vw;
+  font-size: 0.95rem;
+  color: #0d0d0d;
 }
 
-.signup-form {
-  margin-top: 25px;
+/* Forms */
+.login-form {
+  width: 100%;
+  margin-top: 10px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 28vw;
+  gap: 15px;
 }
 
-.form-line {
+/* Form Lines */
+.form-line, .password-line {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  flex: 1;
-  flex-basis: 100%;
-  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .input-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 59px;
-  background-color: rgba(255, 255, 255, 1);
-  min-height: 20px;
-  padding: 10px 20px;
-  width: 100%;
-  border: 3px #e4e4e4;
-  font-size: 1vw;
-  transition: all 0.3s ease;
-  outline: none;
-  box-shadow: 2px 2px 6px rgba(162, 5, 26, 0.3);
-}
-
-.input-group::placeholder {
-  color: rgba(138, 134, 134, 0.5);
-  font-size: 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.input-group:hover {
-  background-color: #e4e4e4;
+  flex: 1;
+  padding: 8px 18px;
+  border: 2px solid #e4e4e4;
+  border-radius: 25px;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .input-group:focus {
-  border: 2px solid rgb(162, 5, 26);
-  box-shadow: 0px 0px 10px rgba(162, 5, 26, 0.6);
+  border-color: rgb(162, 5, 26);
+  box-shadow: 0 0 4px rgba(162, 5, 26, 0.4);
+  outline: none;
 }
 
+.input-group::placeholder {
+  color: #aaa;
+}
+
+/* Input Field for Errors */
+.input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Password Field */
 .password-line {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
+
 .input-with-icon {
   position: relative;
   width: 100%;
@@ -152,245 +140,115 @@
 
 .input-with-icon input {
   width: 100%;
-  padding-right: 40px; 
+  padding-right: 35px;
 }
+
 .eye-icon {
   position: absolute;
-  right: 12px;
   top: 50%;
+  right: 12px;
   transform: translateY(-50%);
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
   padding: 0;
 }
-.forget-password {
+
+.eye-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Checkbox */
+.checkbox {
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgb(162, 5, 26);
+  border-radius: 4px;
+  background: white;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkbox:checked {
+  background-color: rgb(162, 5, 26);
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Agreement */
+.agreement-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: black;
+}
+
+.agreement-text {
+  margin-top: 5px;
+  color: black;
+}
+
+.highlighted-text {
+  color: rgb(162, 5, 26);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Buttons */
+.cta-button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: 2px solid rgb(162, 5, 26);
+  border-radius: 25px;
+  background-color: rgb(162, 5, 26);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cta-button:hover {
+  background-color: transparent;
+  color: rgb(162, 5, 26);
+}
+/* Text links */
+.forget-password,
+.login-link {
   font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
   color: rgb(162, 5, 26);
-  transition: all 0.3s ease;
+  text-decoration: underline;
   font-size: 1.3vw;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
 .forget-password:hover {
   color: darkred;
 }
 
-.checkbox {
-  appearance: none;
-  width: 2.5vw;
-  height: 2.5vw;
-  border: 2px solid rgb(162, 5, 26);
-  border-radius: 4px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 2px 2px 8px rgba(162, 5, 26, 0.4);
-}
-
-.checkbox:checked {
-  background-color: rgb(162, 5, 26);
-  border-color: rgb(162, 5, 26);
-  position: relative;
-}
-
-.checkbox:checked::after {
-  content: "✔";
-  color: white;
-  font-size: 1.5vw;
-  font-weight: bold;
-}
-
-.eye-icon img {
-  aspect-ratio: 1;
-  width: 1.5vw;
-}
-
-.agreement-section {
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  gap: 10px;
-  width: 80%;
-  color: rgb(162, 5, 26);
-  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 1.1vw;
-}
-
-.agreement-text {
-  margin-top: 5px;
-  display: block;
-  color: black;
-}
-
-.highlighted-text {
-  text-decoration: underline;
-  color: rgb(162, 5, 26);
-}
-
-.cta-button {
-  text-shadow: 2px 2px 8px rgba(162, 5, 26, 0.5);
-  border-radius: 43px;
-  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
-  background-color: rgb(162, 5, 26);
-  margin-top: 25px;
-  font-size: 1.2vw;
-  font-weight: 400;
-  color: #e4e4e4;
-  line-height: 1.2;
-  padding: 8px 20px;
-  border: 2px solid rgb(162, 5, 26);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
-.text-danger {
-  display: block;
-  color: red;
-  font-size: 0.875rem; /* slightly smaller */
-  margin-top: 4px; /* space between input and error message */
-}
-
-.cta-button::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgb(162, 5, 26);
-  font-size: 1.5vw;
-  opacity: 0;
-  transition: opacity 0.3s ease, left 0.3s ease;
-}
-
-.cta-button:hover::before {
-  content: ">";
-  left: 10px;
-  opacity: 1;
-}
-
-.cta-button:hover {
-  padding: 10px 2vw;
-  background-color: transparent;
-  color: rgb(162, 5, 26);
-  transform: translateY(-2px);
-}
-
-.cta-button:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
+/* Questions */
 .question {
-  font-size: 1.2vw;
-  margin-top: 20px;
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #333;
 }
 
-.login-link {
-  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-  color: rgb(162, 5, 26);
-  text-decoration: underline;
-  transition: all 0.3s ease;
-  font-size: 1.3vw;
-}
-@media (max-width: 1200px) {
-  .signup-section {
-    flex-direction: column;
-    gap: 5vw;
-  }
-  
-  .illustrator {
-    width: 40vw;
-  }
+/* Errors */
+.text-danger {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 3px;
 }
 
-@media (max-width: 992px) {
-  .signup {
-    width: 80%;
-    padding: 30px;
-  }
-  
-  .form {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .signup-section {
-    flex-direction: column;
-    gap: 5vw;
-  }
-  
-  .illustrator {
-    width: 50vw;
-  }
-  
-  .signup-title {
-    font-size: 5vw;
-  }
-
-  .form {
-    width: 100%;
-  }
-
-  .input-group {
-    font-size: 3vw;
-  }
-}
-
-@media (max-width: 576px) {
-  .signup {
-    width: 95%;
-    padding: 20px;
-  }
-  
-  .signup-title {
-    font-size: 6vw;
-  }
-  
-  .cta-button {
-    font-size: 3vw;
-  }
-  
-  .divider-text,
-  .forget-password,
-  .question,
-  .login-link {
-    font-size: 3vw;
-  }
-}
-
-@media (max-width: 321px) {
-  .signup {
-    width: 90%;
-    margin-top: 25%;
-    padding: 15px;
-  }
-  
-  .signup-title {
-    font-size: 7vw;
-  }
-  
-  .cta-button {
-    font-size: 3.5vw;
-  }
-  .agreement-text {
-    font-size: 10px;
-    margin-top: 4px;
-    display: inline-block;
-    color: black;
-  }
-  .checkbox {
-    appearance: none;
-    width: 15vw;
-    height: 10vw;
-  }
-  .divider-text,
-  .forget-password,
-  .question,
-  .login-link {
-    font-size: 3.5vw;
-  }
-}

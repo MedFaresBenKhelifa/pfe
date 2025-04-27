@@ -1,59 +1,33 @@
 <main class="page-container">
   <section class="signup-section">
-      <div class="signup">
-          <img src="images/header/logo.png" class="tunilanci-logo">
-          <h1 class="signup-title">Se connecter</h1>
-          <div class="signup-form">
-              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
-                  <div class="form-line">
-                      <input 
-                        type="text" 
-                        placeholder="Email ou Nom d'utilisateur" 
-                        class="input-group" 
-                        formControlName="email"
-                        required>
-                      <span *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
-                        Email est invalid
-                      </span>
-                  </div>
-                  <div class="form-line">
-                    <div class="input-with-icon">
-                      <input 
-                        [type]="isPasswordVisible ? 'text' : 'password'" 
-                        placeholder="Mot de passe" 
-                        class="input-group" 
-                        formControlName="password"
-                        required 
-                      />
-                      <button 
-                        type="button" 
-                        (click)="togglePasswordVisibility()" 
-                        class="eye-icon"
-                        aria-label="Afficher/Masquer le mot de passe">
-                        <img 
-                          [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" 
-                          alt="Icône œil" 
-                        />
-                      </button>
-                    </div>
-                      <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
-                        Mot de passe est invalid
-                      </span>
-                  </div>
-                  <a href="/verif" class="forget-password">Mot de passe oublié ?</a>
-                  <div class="agreement-section">
-                      <input type="checkbox" id="agreement" class="checkbox" formControlName="rememberMe" />
-                      <label for="agreement" class="agreement-text">
-                        <span>Se souvenir de moi</span>
-                      </label>
-                  </div>
-                  <button type="submit" (click)="join()" class="cta-button">Se connecter</button>
-              </form>
+    <div class="signup">
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo de l'entreprise">
+      <h1 class="login-title">Se connecter</h1>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+          <div class="form-line">
+            <div class="input-container">
+              <input type="text" formControlName="email" placeholder="Email" class="input-group" required>
+              <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
+                Email ou nom d'utilisateur invalide
+              </span>
+            </div>
           </div>
-          <div class="divider-container" role="separator" aria-orientation="horizontal">
-            <div class="divider-line"></div>
-            <div class="divider-text">Vous n'avez pas de compte ?</div>
-            <div class="divider-line"></div>
+          
+
+          <div class="form-line">
+            <div class="input-with-icon">
+              <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" placeholder="Mot de passe" class="input-group" required>
+              <button type="button" (click)="togglePasswordVisibility()" class="eye-icon" aria-label="Afficher/Masquer le mot de passe">
+                <img [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
+              </button>
+            </div>
+            <span class="text-danger" *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touched">
+              Mot de passe est invalide
+            </span>
           </div>
           <div>
             <a (click)="signUp()" class="login-link">S'inscrire</a>
