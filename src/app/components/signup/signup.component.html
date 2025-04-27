@@ -1,7 +1,7 @@
 <main class="page-container">
   <section class="signup-section">
     <div class="signup">
-      <img src="images/header/logo.png" class="tunilanci-logo" alt="Logo de l'entreprise">
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo de l'entreprise">
       <h1 class="signup-title">S'inscrire</h1>
 
       <div class="divider-container" role="separator" aria-orientation="horizontal">
@@ -36,39 +36,42 @@
           </div>
 
           <div class="form-line">
-            <input 
-              type="email" 
-              formControlName="email"
-              placeholder="Email" 
-              class="input-group" 
-              required>
-            <span class="text-danger" *ngIf="signupForm.controls.email?.invalid && signupForm.controls.email?.touched">
-              Email est invalide
-            </span>
-          </div>
-
-          <div class="password-line">
-            <div class="input-with-icon">
+            <div class="input-field">
               <input 
-                [type]="isPasswordVisible ? 'text' : 'password'"
-                formControlName="password"
-                id="signupPassword"
-                placeholder="Mot de passe (8 caractères ou plus)" 
+                type="email" 
+                formControlName="email"
+                placeholder="Email" 
                 class="input-group" 
                 required>
-              <button 
-                type="button" 
-                (click)="togglePasswordVisibility()" 
-                class="eye-icon"
-                aria-label="Afficher/Masquer le mot de passe">
-                <img [src]="isPasswordVisible ? 'images/signup/view.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
-              </button>
+              <span class="text-danger" *ngIf="signupForm.controls.email?.invalid && signupForm.controls.email?.touched">
+                Email est invalide
+              </span>
             </div>
-            <span class="text-danger" *ngIf="signupForm.controls.password?.invalid && signupForm.controls.password?.touched">
-              Mot de passe doit contenir au moins 8 caractères
-            </span>
           </div>
-
+          
+          <div class="password-line">
+            <div class="input-field">
+              <div class="input-with-icon">
+                <input 
+                  [type]="isPasswordVisible ? 'text' : 'password'"
+                  formControlName="password"
+                  id="signupPassword"
+                  placeholder="Mot de passe (8 caractères ou plus)" 
+                  class="input-group" 
+                  required>
+                <button 
+                  type="button" 
+                  (click)="togglePasswordVisibility()" 
+                  class="eye-icon"
+                  aria-label="Afficher/Masquer le mot de passe">
+                  <img [src]="isPasswordVisible ? 'images/signup/view.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
+                </button>
+              </div>
+              <span class="text-danger" *ngIf="signupForm.controls.password?.invalid && signupForm.controls.password?.touched">
+                Mot de passe doit contenir au moins 8 caractères
+              </span>
+            </div>
+          </div>
           <div class="agreement-section">
             <input 
               type="checkbox" 

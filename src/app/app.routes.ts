@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'change', component: ChangerMdpComponent }, // Assurez-vous que le composant existe
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'Dashboard', component: DashboardComponent },
   { path: 'Ajout', component: AjoutComponent },
   { path: 'gerer', component: GererComponent },
   { path: 'code', component: CodeComponent },

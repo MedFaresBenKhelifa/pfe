@@ -63,6 +63,11 @@ export class LoginComponent {
         error: (err) => {
           console.error("Login error:", err);
           this.errorMessage = err.error?.error || "Une erreur est survenue lors de la connexion";
+          this.isLoading = false;
+          // this.authToggleService.setNavBar(false);
+          // this.authToggleService.setLoggedIn(false);
+          // this.authToggleService.setSignUpVisible(true);
+          // this.authToggleService.setLoginVisible(false);
         },
         complete: () => {
           this.isLoading = false;

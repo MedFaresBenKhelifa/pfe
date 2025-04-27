@@ -1,19 +1,22 @@
 <main class="page-container">
   <section class="signup-section">
     <div class="signup">
-      <img src="images/header/logo.png" class="tunilanci-logo" alt="Logo de l'entreprise">
-      <h1 class="signup-title">Se connecter</h1>
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo de l'entreprise">
+      <h1 class="login-title">Se connecter</h1>
 
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-      <div class="signup-form">
+      <div class="login-form">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
           <div class="form-line">
-            <input type="text" formControlName="email" placeholder="Email ou Nom d'utilisateur" class="input-group" required>
-            <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
-              Email ou nom d'utilisateur invalide
-            </span>
+            <div class="input-container">
+              <input type="text" formControlName="email" placeholder="Email" class="input-group" required>
+              <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
+                Email ou nom d'utilisateur invalide
+              </span>
+            </div>
           </div>
+          
 
           <div class="form-line">
             <div class="input-with-icon">

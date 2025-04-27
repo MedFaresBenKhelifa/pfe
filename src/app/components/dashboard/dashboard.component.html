@@ -1,23 +1,33 @@
-<body>
-    <header class="dashboard-header">
-      <h1> <span id="atb">ATB</span> Tableau de Bord de Surveillance</h1>
-  </header>  
-  <main class="dashboard-grid">
-      <section class="card">
-          <h2>Tendances de Température</h2>
-          <canvas id="temperatureChart"></canvas>
-      </section>
-      <section class="card">
-          <h2>Niveaux de Gaz</h2>
-          <canvas id="gasChart"></canvas>
-      </section>
-      <section class="card">
-          <h2>Journal des Accès</h2>
-          <ul id="accessLog">
-              <li>John Doe - Entrée - 10h15</li>
-              <li>Jane Smith - Sortie - 10h45</li>
-              <li>Michael Brown - Entrée - 11h05</li>
-          </ul>
-      </section>
-  </main>
-</body>
+<header class="dashboard-header">
+  <h1><span id="atb">ATB</span> Tableau de Bord de Surveillance</h1>
+</header>
+
+<main class="dashboard-grid">
+  <section class="card">
+    <h2>Tendances de Température</h2>
+    <canvas #temperatureCanvas id="temperatureChart"></canvas>
+  </section>
+
+  <section class="card">
+    <h2>Niveaux de Gaz</h2>
+    <canvas #gasCanvas id="gasChart"></canvas>
+  </section>
+
+  <section class="card">
+    <h2>Journal des Accès</h2>
+    <ul id="accessLog">
+      <li>John Doe - Entrée - 10h15</li>
+      <li>Jane Smith - Sortie - 10h45</li>
+      <li>Michael Brown - Entrée - 11h05</li>
+    </ul>
+  </section>
+</main>
+
+<div class="toasters">
+  <div class="toast" [class.show]="showTempToast">
+    🚨 Attention : température élevée détectée !
+    </div>
+  <div class="toast" [class.show]="showHighGasToast">
+    🚨 Attention : niveau de gaz élevé détecté !
+  </div>
+</div>
