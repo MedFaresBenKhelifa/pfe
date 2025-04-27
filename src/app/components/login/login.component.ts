@@ -35,15 +35,10 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      this.authToggleService.setLoggedIn(true);
-      this.authToggleService.setSignUpVisible(false);
-      this.authToggleService.setLoginVisible(false); 
-      this.authToggleService.setNavBar(true);
-      this.router.navigate(['/Dashboard']); 
       this.errorMessage = '';
-
+  
       const { email, password } = this.loginForm.value;
-
+  
       this.http.post('http://localhost:8000/api/login/', 
         { email, password },
         { 
@@ -55,16 +50,27 @@ export class LoginComponent {
       ).subscribe({
         next: (response: any) => {
           if (response.success) {
-            this.router.navigate(['/dashboard']);
+            this.authToggleService.setLoggedIn(true);
+            this.authToggleService.setSignUpVisible(false);
+            this.authToggleService.setLoginVisible(false); 
+            this.authToggleService.setNavBar(true);
+            this.router.navigate(['/Dashboard']);
           } else {
             this.errorMessage = response.error || "Erreur de connexion";
+            this.authToggleService.setNavBar(false);
+            this.authToggleService.setLoggedIn(false);
+            this.authToggleService.setSignUpVisible(true);
+            this.authToggleService.setLoginVisible(false);
           }
+          this.isLoading = false;
         },
         error: (err) => {
           console.error("Login error:", err);
           this.errorMessage = err.error?.error || "Une erreur est survenue lors de la connexion";
-        },
-        complete: () => {
+          this.authToggleService.setNavBar(false);
+          this.authToggleService.setLoggedIn(false);
+          this.authToggleService.setSignUpVisible(true);
+          this.authToggleService.setLoginVisible(false);
           this.isLoading = false;
         }
       });
@@ -72,6 +78,7 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
     }
   }
+  
 
   private getCookie(name: string): string | null {
     const cookies = document.cookie.split(';');

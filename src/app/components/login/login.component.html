@@ -1,18 +1,20 @@
 <main class="page-container">
-  <section class="signup-section">
-    <div class="signup">
-      <img src="images/header/logo.png" class="tunilanci-logo" alt="Logo de l'entreprise">
-      <h1 class="signup-title">Se connecter</h1>
+  <section class="login-section">
+    <div class="login">
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo de l'entreprise">
+      <h1 class="login-title">Se connecter</h1>
 
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-      <div class="signup-form">
+      <div class="login-form">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
           <div class="form-line">
-            <input type="text" formControlName="email" placeholder="Email ou Nom d'utilisateur" class="input-group" required>
-            <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
-              Email ou nom d'utilisateur invalide
-            </span>
+            <div class="input-container">
+              <input type="text" formControlName="email" placeholder="Email" class="input-group" required>
+              <span class="text-danger" *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">
+                Email ou nom d'utilisateur invalide
+              </span>
+            </div>
           </div>
 
           <div class="form-line">
@@ -27,7 +29,7 @@
             </span>
           </div>
 
-          <a [routerLink]="'/verif'" class="forget-password">Mot de passe oublié ?</a>
+          <a [routerLink]="'/Verif'" class="forget-password">Mot de passe oublié ?</a>
 
 
           <div class="agreement-section">
@@ -51,7 +53,7 @@
       </div>
 
       <div>
-        <a routerLink="/signup" class="login-link">S'inscrire</a>
+        <a routerLink="/SignUp" class="login-link">S'inscrire</a>
       </div>
     </div>
   </section>

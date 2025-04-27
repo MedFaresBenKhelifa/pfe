@@ -11,25 +11,23 @@
   margin: 5vw 0;
 }
 
-.signup-section {
+.login-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 0; /* Less padding */
+  padding: 50px 0;
+  /* Less padding */
   width: 100%;
 }
-
-.signup {
+.login {
   width: 500px;
   padding: 35px 50px;
   border-radius: 24px;
   border: 2.5px solid var(--Cards-Stroke);
-  background: linear-gradient(
-    155deg,
-    rgba(181, 181, 181, 0.25) 0%,
-    rgba(255, 255, 255, 0.25) 50%,
-    rgba(228, 228, 228, 0.25) 100%
-  );
+  background: linear-gradient(155deg,
+      rgba(181, 181, 181, 0.25) 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(228, 228, 228, 0.25) 100%);
   backdrop-filter: blur(100px);
   display: flex;
   flex-direction: column;
@@ -54,8 +52,11 @@
 }
 
 .divider-container {
+
+
   display: flex;
   align-items: center;
+
   justify-content: center;
   margin: 15px 0;
   width: 100%;
@@ -66,11 +67,13 @@
   flex: 1;
   height: 2px;
   background-color: #0d0d0d;
+
 }
 
 .divider-text {
   font-size: 0.95rem;
   color: #0d0d0d;
+
 }
 
 /* Forms */
@@ -78,20 +81,18 @@
   width: 100%;
   margin-top: 10px;
 }
-
 .form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 /* Form Lines */
-.form-line, .password-line {
+.form-line,
+.password-line {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-
 .input-group {
   flex: 1;
   padding: 8px 18px;
@@ -101,13 +102,12 @@
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-
 .input-group:focus {
   border-color: rgb(162, 5, 26);
   box-shadow: 0 0 4px rgba(162, 5, 26, 0.4);
   outline: none;
-}
 
+}
 .input-group::placeholder {
   color: #aaa;
 }
@@ -118,8 +118,6 @@
   display: flex;
   flex-direction: column;
 }
-
-
 /* Password Field */
 .password-line {
   width: 100%;
@@ -132,17 +130,14 @@
   flex-direction: column;
   width: 100%;
 }
-
 .input-with-icon {
   position: relative;
   width: 100%;
 }
-
 .input-with-icon input {
   width: 100%;
   padding-right: 35px;
 }
-
 .eye-icon {
   position: absolute;
   top: 50%;
@@ -153,12 +148,10 @@
   cursor: pointer;
   padding: 0;
 }
-
 .eye-icon img {
   width: 18px;
   height: 18px;
 }
-
 /* Checkbox */
 .checkbox {
   width: 30px;
@@ -169,12 +162,12 @@
   appearance: none;
   cursor: pointer;
   transition: background-color 0.3s;
-}
 
+}
 .checkbox:checked {
   background-color: rgb(162, 5, 26);
-}
 
+}
 .checkbox:checked::after {
   content: "✔";
   color: white;
@@ -197,10 +190,11 @@
 
 .agreement-text {
   margin-top: 5px;
+
   color: black;
 }
-
 .highlighted-text {
+
   color: rgb(162, 5, 26);
   text-decoration: underline;
   cursor: pointer;
@@ -217,18 +211,20 @@
   color: white;
   cursor: pointer;
   transition: all 0.3s;
-}
 
+}
 .cta-button:hover {
   background-color: transparent;
   color: rgb(162, 5, 26);
 }
+
 /* Text links */
 .forget-password,
 .login-link {
   font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
   color: rgb(162, 5, 26);
   text-decoration: underline;
+
   font-size: 1.3vw;
   text-align: center;
   transition: all 0.3s ease;
@@ -251,4 +247,3 @@
   font-size: 0.75rem;
   margin-top: 3px;
 }
-
