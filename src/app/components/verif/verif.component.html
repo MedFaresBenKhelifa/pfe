@@ -1,22 +1,23 @@
-<main class="page-container">   
-  <section class="signup-section">       
-      <div class="signup">           
-          <img src="images/header/logo.png" class="atb-logo" alt="Logo">           
-          <h1 class="signup-title">Mot de Passe oublié ?</h1>           
-          <div class="signup-form">               
-              <form class="form">                   
-                  <div class="password-line">                       
-                      <input 
-                          type="email" 
-                          placeholder="Entrez votre email pour recevoir le code de vérification" 
-                          class="input-group" 
-                          id="email" 
-                          required 
-                      />                   
-                  </div>               
-              </form>           
-          </div>           
-          <button (click)="getVerif()" class="cta-button">Envoyer le Code</button>       
-      </div>   
-  </section> 
-</main>
+<main class="page-container">
+    <section class="signup-section">
+      <div class="signup">
+        <img src="images/header/logo.png" class="atb-logo" alt="Logo">
+        <h1 class="signup-title">Mot de Passe oublié ?</h1>
+        <div class="signup-form">
+          <form class="form">
+            <div class="password-line">
+              <input 
+                type="email" 
+                placeholder="Entrez votre email" 
+                class="input-group" 
+                id="email" 
+                required
+              />
+            </div>
+          </form>
+        </div>
+        <button (click)="getVerif()" class="cta-button">Envoyer le Code</button>
+      </div>
+    </section>
+  </main>
+  

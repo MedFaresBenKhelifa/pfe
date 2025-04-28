@@ -1,79 +1,97 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserEditModalComponent } from "../user-edit-modal/user-edit-modal.component";
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../../services/employee.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Add this
+import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component'; // Add this
 
 @Component({
   selector: 'app-gerer',
-  standalone: true, 
-  imports: [CommonModule, UserEditModalComponent, FormsModule],
+  standalone: true,
+  imports: [CommonModule, UserEditModalComponent], // Add these imports
   templateUrl: './gerer.component.html',
-  styleUrls: ['./gerer.component.css'],
+  styleUrls: ['./gerer.component.css']
 })
-export class GererComponent {
+export class GererComponent implements OnInit {
   showModal = false;
   selectedUser: any = null;
-  searchTerm: string = '';
   filteredUsers: any[] = [];
+  users: any[] = [];
+  searchInput: HTMLInputElement | null = null;
 
-  users = [
-    { nom: 'Mark', prenom: 'Otto', email: 'mark123@gmail.com' },
-    { nom: 'Jacob', prenom: 'Thornton', email: 'fat@gmail.com' },
-    { nom: 'Larry', prenom: 'The Bird', email: 'twitter@gmail.com' },
-    { nom: 'John', prenom: 'Doe', email: 'john@gmail.com' },
-    { nom: 'Jane', prenom: 'Smith', email: 'jane@gmail.com' },
-    { nom: 'Jane', prenom: 'Smith', email: 'jane@gmail.com' },
-  ];
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private employeeService: EmployeeService
+  ) {}
 
-  constructor(private cdr: ChangeDetectorRef) {
-    this.filteredUsers = [...this.users];
+  ngOnInit(): void {
+    this.loadEmployees();
   }
 
-  applyFilter() {
-    if (!this.searchTerm) {
+  loadEmployees(): void {
+    this.employeeService.getEmployees().subscribe({
+      next: (employees) => {
+        this.users = employees;
+        this.filteredUsers = [...this.users];
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error loading employees:', error);
+      }
+    });
+  }
+
+  applyFilter(searchTerm: string): void {
+    if (!searchTerm) {
       this.filteredUsers = [...this.users];
       return;
     }
 
-    const term = this.searchTerm.toLowerCase();
+    const term = searchTerm.toLowerCase();
     this.filteredUsers = this.users.filter(user => 
-      user.nom.toLowerCase().includes(term) ||
-      user.prenom.toLowerCase().includes(term) ||
+      user.last_name.toLowerCase().includes(term) ||
+      user.first_name.toLowerCase().includes(term) ||
       user.email.toLowerCase().includes(term)
     );
   }
 
-  openModal(user: any) {
+  openModal(user: any): void {
     this.selectedUser = {...user};
     this.showModal = true;
   }
 
-  closeModal() {
+  closeModal(): void {
     this.showModal = false;
   }
 
-  saveChanges(updatedUser: any) {
-    const index = this.users.findIndex(user => user.email === this.selectedUser.email);
-    if (index !== -1) {
-      this.users[index] = { ...updatedUser };
-      this.applyFilter(); // Update filtered list after edit
-    }
-    this.closeModal();
+  saveChanges(updatedUser: any): void {
+    const formData = new FormData();
+    formData.append('first_name', updatedUser.first_name);
+    formData.append('last_name', updatedUser.last_name);
+    formData.append('email', updatedUser.email);
+
+    this.employeeService.updateEmployee(updatedUser.id, formData).subscribe({
+      next: (response) => {
+        this.loadEmployees();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error updating employee:', error);
+      }
+    });
   }
 
-  deleteUser(index: number) {
+  deleteUser(index: number): void {
     const user = this.filteredUsers[index];
-    const confirmDelete = confirm(`Delete ${user.nom} ${user.prenom}?`);
+    const confirmDelete = confirm(`Delete ${user.first_name} ${user.last_name}?`);
     if (confirmDelete) {
-      // Remove from main array
-      const mainIndex = this.users.findIndex(u => u.email === user.email);
-      if (mainIndex !== -1) {
-        this.users.splice(mainIndex, 1);
-      }
-      // Remove from filtered array
-      this.filteredUsers.splice(index, 1);
-      this.cdr.markForCheck();
+      this.employeeService.deleteEmployee(user.id).subscribe({
+        next: () => {
+          this.loadEmployees();
+        },
+        error: (error) => {
+          console.error('Error deleting employee:', error);
+        }
+      });
     }
   }
 }

@@ -1,19 +1,17 @@
+<!-- gerer.component.html -->
 <div class="container">
-  <!-- Add search-container class to the parent div -->
   <div class="mb-3 search-container" style="max-width: 400px;">
     <div class="input-group">
       <input 
+        #searchInput
         type="text" 
         class="form-control" 
         placeholder="Search employees..." 
-        [(ngModel)]="searchTerm"
-        (input)="applyFilter()"
+        (input)="applyFilter(searchInput.value)"
       >
     </div>
   </div>
 
-  
-  <!-- Employees Table -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -27,8 +25,8 @@
     <tbody>
       <tr *ngFor="let user of filteredUsers; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ user.nom }}</td>
-        <td>{{ user.prenom }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.first_name }}</td>
         <td>{{ user.email }}</td>
         <td>
           <button type="button" class="btn btn-success" (click)="openModal(user)">Modifier</button>

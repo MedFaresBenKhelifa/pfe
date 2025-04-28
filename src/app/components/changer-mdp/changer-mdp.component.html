@@ -1,31 +1,31 @@
 <main class="page-container">
   <section class="signup-section">
-      <div class="signup">
-          <img src="images/header/logo.png" class="atb-logo" alt="Logo">
-          <h1 class="signup-title">Modifier le Mot de Passe</h1>
-          <div class="signup-form">
-              <form class="form">
-                  <div class="password-line">
-                      <input 
-                        type="password" 
-                        placeholder="Nouveau mot de passe" 
-                        class="input-group" 
-                        id="new-password" 
-                        required 
-                      />
-                  </div>
-                  <div class="password-line">
-                    <input 
-                      type="password" 
-                      placeholder="Confirmer le nouveau mot de passe" 
-                      class="input-group" 
-                      id="confirm-password" 
-                      required 
-                    />
-                </div>
-              </form>
+    <div class="signup">
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo">
+      <h1 class="signup-title">Modifier le Mot de Passe</h1>
+      <div class="signup-form">
+        <form class="form">
+          <div class="password-line">
+            <input 
+              type="password" 
+              placeholder="Nouveau mot de passe" 
+              class="input-group" 
+              id="new-password" 
+              required
+            />
           </div>
-          <button (click)="backToLogin()" class="cta-button">Modifier le Mot de Passe</button>
+          <div class="password-line">
+            <input 
+              type="password" 
+              placeholder="Confirmer nouveau mot de passe" 
+              class="input-group" 
+              id="confirm-password" 
+              required
+            />
+          </div>
+        </form>
       </div>
+      <button (click)="backToLogin()" class="cta-button">Modifier le Mot de Passe</button>
+    </div>
   </section>
 </main>
