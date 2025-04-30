@@ -34,11 +34,13 @@ export class HeaderComponent {
   }
 
   logout() {
+    localStorage.clear(); // or remove specific keys
     this.authToggleService.setLoggedIn(false);
     this.authToggleService.setSignUpVisible(true);
     this.authToggleService.setLoginVisible(false);
     this.authToggleService.setNavBar(false);
   }
+  
 
   showLogin() {
     this.authToggleService.setSignUpVisible(false);
@@ -48,12 +50,6 @@ export class HeaderComponent {
   showSignup(){
     this.authToggleService.setSignUpVisible(true);
     this.authToggleService.setLoginVisible(false);
-    this.authToggleService.setNavBar(false);
-  }
-  onLogoClick(){
-    this.authToggleService.setSignUpVisible(true);
-    this.authToggleService.setLoginVisible(false);
-    this.authToggleService.setLoggedIn(false);
     this.authToggleService.setNavBar(false);
   }
 }

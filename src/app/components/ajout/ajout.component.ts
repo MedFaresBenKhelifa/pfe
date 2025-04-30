@@ -14,8 +14,10 @@ export class AjoutComponent {
 
   constructor(
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    
   ) {}
+
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -53,7 +55,7 @@ export class AjoutComponent {
         emailInput.value = '';
         this.imagePreview = null;
         this.selectedFile = null;
-        this.router.navigate(['/gerer']);
+        this.router.navigate(['/Gerer']);
       },
       error: (error) => {
         console.error('Error adding employee:', error);

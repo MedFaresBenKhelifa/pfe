@@ -1,0 +1,85 @@
+/* Container */
+.toast-container {
+  position: fixed;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 520px;
+}
+
+/* Base Toast Styles */
+.toast {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+}
+
+/* Show State - Restored Slide Down Animation */
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Single Toast Position */
+.toast.temp {
+  top: 0;
+}
+
+.toast.gas {
+  top: 0;
+}
+
+/* Stacked Position (when both are visible) */
+.toast.temp.show + .toast.gas.show {
+  top: 90px; /* Space between toasts */
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Colors */
+.toast.temp {
+  background-color: rgb(162, 5, 26);
+  color: white;
+}
+
+.toast.gas {
+  background-color: #0033cc;
+  color: white;
+}
+
+/* Icon */
+.toast::before {
+  content: "🔔";
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+/* Close Button */
+.toast-close {
+  margin-bottom: 8px;
+  margin-left: 18px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}

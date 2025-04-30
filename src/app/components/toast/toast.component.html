@@ -1,0 +1,15 @@
+<div class="toast-container">
+  <div class="toast temp" [class.show]="toastService.showTempToast$ | async">
+    <span class="toast-message">
+      Anomalie détectée : température anormalement élevée. Intervention recommandée.
+    </span>
+    <button class="toast-close" (click)="toastService.dismissTemp()">×</button>
+  </div>
+  
+  <div class="toast gas" [class.show]="toastService.showHighGasToast$ | async">
+    <span class="toast-message">
+      Alerte sécurité : concentration de gaz anormale. Merci de procéder aux vérifications.
+    </span>
+    <button class="toast-close" (click)="toastService.dismissGas()">×</button>
+  </div>
+</div>

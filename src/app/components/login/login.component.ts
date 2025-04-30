@@ -20,18 +20,21 @@ export class LoginComponent {
   isPasswordVisible = false;
   isLoading = false;
   errorMessage = '';
+  isSignedUp = true;
 
   constructor(private http: HttpClient, private router: Router
     ,   private authToggleService: AuthToggleService ,
 
-  ) {
-    
+  ) {    
   }
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
-
+  showLogin() {
+    this.authToggleService.setSignUpVisible(false);
+    this.authToggleService.setLoginVisible(true);
+  }
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
@@ -81,16 +84,22 @@ export class LoginComponent {
       });
     } else {
       this.loginForm.markAllAsTouched();
-    }
-  }
-  
+    }}
 
-  private getCookie(name: string): string | null {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-      const [key, value] = cookie.trim().split('=');
-      if (key === name) return decodeURIComponent(value);
-    }
-    return null;
+ngOnInit(): void {
+  this.authToggleService.setLoggedIn(false); // force navBar & logout button to hide
+  this.authToggleService.setNavBar(false);
+  this.authToggleService.setSignUpVisible(true);
+  this.authToggleService.setLoginVisible(false);
+}
+private getCookie(name: string): string | null {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.trim().split('=');
+    if (key === name) return decodeURIComponent(value);
   }
+  return null;
+}
+
+
 }

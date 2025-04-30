@@ -1,10 +1,9 @@
 <!-- ajout.component.html -->
 <main class="page-container"> 
-    <section class="signup-section">
-        <div class="signup">
-            <img src="images/header/logo.png" class="tunilanci-logo">
-            <h1 class="signup-title">Ajouter un employé</h1>
-            <div class="signup-form">
+    <section class="ajout-section">
+        <div class="ajout">
+            <h1 class="ajout-title">Ajouter un employé</h1>
+            <div class="ajout-form">
                 <form class="form" (submit)="addEmployee(firstName, lastName, email); $event.preventDefault()">
                     <div class="form-line">
                         <input #firstName type="text" placeholder="Prénom" class="input-group" name="first-name" required>
@@ -16,8 +15,9 @@
                     <div class="form-line">
                         <input type="file" class="form-control input-group" id="profile-image" (change)="onFileSelected($event)" accept="image/*">
                     </div>
-                    <div class="image-preview-container">
-                        <img *ngIf="imagePreview" [src]="imagePreview" alt="Aperçu du profil" class="img-thumbnail">
+                    <!-- This container (label + image) is completely hidden until imagePreview exists -->
+                    <div class="image-preview-container" >
+                      <img [src]="imagePreview" class="img-thumbnail" />
                     </div>
                     <button type="submit" class="cta-button">
                         <span>Ajouter</span>

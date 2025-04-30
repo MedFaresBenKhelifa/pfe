@@ -59,28 +59,6 @@
   line-height: 1.2;
 }
 
-.divider-container {
-  margin-top: 20px;
-  min-width: 90%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  font: 400 16px/1.2 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-}
-
-.divider-line {
-  background-color: var(--Black, #0d0d0d);
-  height: 2px;
-  flex: 0;
-  flex-basis: 20%;
-}
-
-.divider-text {
-  color: var(--Black, #0d0d0d);
-  text-align: center;
-  font-size: 1vw;
-}
 
 .signup-form {
   margin-top: 25px;
@@ -93,16 +71,6 @@
   justify-content: center;
   align-items: center;
   width: 28vw;
-}
-
-.form-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-  flex-basis: 100%;
-  width: 100%;
 }
 
 .input-group {
@@ -143,81 +111,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.eye-icon {
-  position: absolute;
-  right: 4.5vw;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.forget-password {
-  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-  color: rgb(162, 5, 26);
-  transition: all 0.3s ease;
-  font-size: 1.3vw;
-}
-
-.forget-password:hover {
-  color: darkred;
-}
-
-.checkbox {
-  appearance: none;
-  width: 2.5vw;
-  height: 2.5vw;
-  border: 2px solid rgb(162, 5, 26);
-  border-radius: 4px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 2px 2px 8px rgba(162, 5, 26, 0.4);
-}
-
-.checkbox:checked {
-  background-color: rgb(162, 5, 26);
-  border-color: rgb(162, 5, 26);
-  position: relative;
-}
-
-.checkbox:checked::after {
-  content: "✔";
-  color: white;
-  font-size: 1.5vw;
-  font-weight: bold;
-}
-
-.eye-icon img {
-  aspect-ratio: 1;
-  width: 1.5vw;
-}
-
-.agreement-section {
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  gap: 10px;
-  width: 80%;
-  color: rgb(162, 5, 26);
-  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 1.1vw;
-  padding: 0 20px;
-}
-
-.agreement-text {
-  margin-top: 5px;
-  display: block;
-  color: black;
-}
-
-.highlighted-text {
-  text-decoration: underline;
-  color: rgb(162, 5, 26);
 }
 
 .cta-button {
@@ -267,114 +160,5 @@
   outline-offset: 2px;
 }
 
-.question {
-  font-size: 1.2vw;
-  margin-top: 20px;
-}
 
-.login-link {
-  font: 400 Neulis Alt, -apple-system, Roboto, Helvetica, sans-serif;
-  color: rgb(162, 5, 26);
-  text-decoration: underline;
-  transition: all 0.3s ease;
-  font-size: 1.3vw;
-}
-@media (max-width: 1200px) {
-  .signup-section {
-    flex-direction: column;
-    gap: 5vw;
-  }
-  
-  .illustrator {
-    width: 40vw;
-  }
-}
 
-@media (max-width: 992px) {
-  .signup {
-    width: 80%;
-    padding: 30px;
-  }
-  
-  .form {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .signup-section {
-    flex-direction: column;
-    gap: 5vw;
-  }
-  
-  .illustrator {
-    width: 50vw;
-  }
-  
-  .signup-title {
-    font-size: 5vw;
-  }
-
-  .form {
-    width: 100%;
-  }
-
-  .input-group {
-    font-size: 3vw;
-  }
-}
-
-@media (max-width: 576px) {
-  .signup {
-    width: 95%;
-    padding: 20px;
-  }
-  
-  .signup-title {
-    font-size: 6vw;
-  }
-  
-  .cta-button {
-    font-size: 3vw;
-  }
-  
-  .divider-text,
-  .forget-password,
-  .question,
-  .login-link {
-    font-size: 3vw;
-  }
-}
-
-@media (max-width: 321px) {
-  .signup {
-    width: 90%;
-    margin-top: 25%;
-    padding: 15px;
-  }
-  
-  .signup-title {
-    font-size: 7vw;
-  }
-  
-  .cta-button {
-    font-size: 3.5vw;
-  }
-  .agreement-text {
-    font-size: 10px;
-    margin-top: 4px;
-    display: inline-block;
-    color: black;
-  }
-  .checkbox {
-    appearance: none;
-    width: 15vw;
-    height: 10vw;
-  }
-  .divider-text,
-  .forget-password,
-  .question,
-  .login-link {
-    font-size: 3.5vw;
-  }
-}

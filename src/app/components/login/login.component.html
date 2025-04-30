@@ -53,7 +53,7 @@
       </div>
 
       <div>
-        <a routerLink="/SignUp" class="login-link">S'inscrire</a>
+        <a routerLink="/SignUp" *ngIf="isSignedUp" (click)="showLogin()" class="login-link">S'inscrire</a>
       </div>
     </div>
   </section>

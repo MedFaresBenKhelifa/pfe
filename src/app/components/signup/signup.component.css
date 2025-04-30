@@ -104,12 +104,18 @@
   flex-direction: column;
   gap: 15px;
 }
-
-/* Form Lines */
-.form-line, .password-line {
+.form-line{
   display: flex;
   gap: 10px;
+}
+/* Form Lines */
+.email-line, .password-line {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 /* Inputs */
@@ -171,7 +177,8 @@
 .text-danger {
   color: red;
   font-size: 0.75rem;
-  margin-top: 3px;
+  margin-top: 8px;
+  font-weight: bold;
 }
 
 /* Agreement Section */

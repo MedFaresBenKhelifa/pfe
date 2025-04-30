@@ -6,23 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-
-
-
-
-
 import { routes } from './app.routes';
-
-
 @NgModule({
-
-
-
-
-
-
-
-
   imports: [
     BrowserModule,
     CommonModule,

@@ -24,17 +24,25 @@ export class SignupComponent {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
+  isLoginVisible = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private authToggleService: AuthToggleService ,
-  ) {}
+  ) {
+    this.authToggleService.isLoginVisible$.subscribe((state) => {
+    this.isLoginVisible = state;
+  });
+}
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
-
+  showSignup(){
+    this.authToggleService.setSignUpVisible(true);
+    this.authToggleService.setLoginVisible(false);
+  }
   onSubmit() {
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();

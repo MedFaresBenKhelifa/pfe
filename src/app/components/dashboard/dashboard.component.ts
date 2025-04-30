@@ -1,169 +1,97 @@
-import { Component, AfterViewInit, OnInit, OnDestroy, ViewChild, ElementRef, inject } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
+import { PLATFORM_ID, Inject } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { MonitoringService } from '../../services/monitoring.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
+export class DashboardComponent implements AfterViewInit, OnDestroy {
   @ViewChild('temperatureCanvas') temperatureCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('gasCanvas') gasCanvas!: ElementRef<HTMLCanvasElement>;
-
+  
   temperatureChart: Chart | null = null;
   gasChart: Chart | null = null;
-  private intervalId: any;
-  private platformId = inject(PLATFORM_ID);
-  private currentTemperatures: number[] = [];
-  private currentGasLevels: number[] = [];
+  private chartUpdateInterval: any;
 
-  // Toast controls
-  showTempToast: boolean = false;
-  showHighGasToast: boolean = false;
-  showLowO2Toast: boolean = false;
+  constructor(
+    public monitoringService: MonitoringService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {this.renderTemperatureChart();
-      this.renderCO2Chart();
-      this.intervalId = setInterval(() => {
-        this.updateChartsRealTime();
-      }, 10000); // update every 10 seconds
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initializeCharts();
+      this.startChartUpdates();
     }
   }
 
-  ngOnDestroy() {
-
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+  private initializeCharts(): void {
+    this.renderTemperatureChart();
+    this.renderGasChart();
   }
 
-  renderTemperatureChart() {
-
-
-
-
-
-
-
-
-
-    if (this.temperatureChart) {
-      this.temperatureChart.destroy();
-    }
-
-    const ctx = this.temperatureCanvas?.nativeElement.getContext('2d');
-    if (!ctx) return;
-
-    this.currentTemperatures = this.generateRandomTemperatures();
-
-    this.temperatureChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: this.generateHourLabels(),
-        datasets: [{
-          label: 'Température (°C)',
-          data: this.currentTemperatures,
-          borderColor: 'rgb(162, 5, 26)',
-          backgroundColor: 'rgba(162, 5, 26, 0.3)',
-          fill: true
-        }]
-      },
-      options: { responsive: true }
-    });
+  private startChartUpdates(): void {
+    this.chartUpdateInterval = setInterval(() => {
+      this.updateChartsWithSlide();
+    }, 5000);
   }
 
-  renderCO2Chart() {
-    if (this.gasChart) {
-      this.gasChart.destroy();
-    }
-
-    const ctx = this.gasCanvas?.nativeElement.getContext('2d');
-    if (!ctx) return;
-
-    this.currentGasLevels = this.generateRandomGasLevels();
-
-    this.gasChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.generateHourLabels(),
-        datasets: [{
-          label: 'Niveaux de Gaz (CO₂ ppm)',
-          data: this.currentGasLevels,
-          backgroundColor: 'blue'
-        }]
-      },
-      options: { responsive: true }
-    });
+private updateChartsWithSlide(): void {
+  // Access data directly from the service
+  if (this.temperatureChart) {
+    this.temperatureChart.data.datasets[0].data = this.monitoringService.currentTemperatures;
+    this.temperatureChart.update();
   }
 
-  updateChartsRealTime() {
-    // Shift and push new temperature
-    if (this.currentTemperatures.length > 0) {
-      this.currentTemperatures.shift();
-      this.currentTemperatures.push(Number((Math.random() * 10 + 20).toFixed(1)));
-    }
-  
-    // Shift and push new gas level
-    if (this.currentGasLevels.length > 0) {
-      this.currentGasLevels.shift();
-      this.currentGasLevels.push(Math.floor(Math.random() * 300 + 100));
-    }
-  
-    // Update temperature chart
-    if (this.temperatureChart && this.temperatureChart.data.datasets[0]) {
-      this.temperatureChart.data.datasets[0].data = this.currentTemperatures;
-      this.temperatureChart.update();
-  
-      const latestTemp = this.currentTemperatures[this.currentTemperatures.length - 1];
-      if (latestTemp > 20) {
-        this.triggerTempToast();
-      }
-    }
-  
-    // Update gas chart
-    if (this.gasChart && this.gasChart.data.datasets[0]) {
-      this.gasChart.data.datasets[0].data = this.currentGasLevels;
-      this.gasChart.update();
-  
-      const latestGasLevel = this.currentGasLevels[this.currentGasLevels.length - 1];
-      if (latestGasLevel > 200) {
-        this.triggerHighGasToast();
-      }
-    }
+  if (this.gasChart) {
+    this.gasChart.data.datasets[0].data = this.monitoringService.currentGasLevels;
+    this.gasChart.update();
   }
-  
+}
 
-  triggerTempToast() {
-    this.showTempToast = true;
-    setTimeout(() => {
-      this.showTempToast = false;
-    }, 8000);
-  }
+private renderTemperatureChart(): void {
+  const ctx = this.temperatureCanvas?.nativeElement.getContext('2d');
+  if (!ctx) return;
 
-  
-  triggerHighGasToast() {
-    this.showHighGasToast = true;
-    setTimeout(() => {
-      this.showHighGasToast = false;
-    }, 8000);
-  }
-  
+  this.temperatureChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: this.generateHourLabels(),
+      datasets: [{
+        label: 'Température (°C)',
+        data: this.monitoringService.currentTemperatures, // Use public property
+        borderColor: 'rgb(162, 5, 26)',
+        backgroundColor: 'rgba(162, 5, 26, 0.3)',
+        fill: true
+      }]
+    },
+    options: { responsive: true }
+  });
+}
 
+private renderGasChart(): void {
+  const ctx = this.gasCanvas?.nativeElement.getContext('2d');
+  if (!ctx) return;
 
-  generateRandomTemperatures(): number[] {
-    const temps: number[] = [];
-    for (let i = 0; i < 6; i++) {
-      temps.push(Number((Math.random() * 10 + 20).toFixed(1)));
-    }
-    return temps;
-  }
+  this.gasChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: this.generateHourLabels(),
+      datasets: [{
+        label: 'Niveaux de Gaz (CO₂ ppm)',
+        data: this.monitoringService.currentGasLevels, // Use public property
+        backgroundColor: 'blue'
+      }]
+    },
+    options: { responsive: true }
+  });
+}
 
-  generateHourLabels(): string[] {
+  private generateHourLabels(): string[] {
     const labels: string[] = [];
     const now = new Date();
     let currentHour = now.getHours();
@@ -179,11 +107,15 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
     return labels.reverse();
   }
 
-  generateRandomGasLevels(): number[] {
-    const gases: number[] = [];
-    for (let i = 0; i < 6; i++) {
-      gases.push(Math.floor(Math.random() * 300 + 100)); // 100-400 ppm
+  ngOnDestroy(): void {
+    if (this.chartUpdateInterval) {
+      clearInterval(this.chartUpdateInterval);
     }
-    return gases;
+    if (this.temperatureChart) {
+      this.temperatureChart.destroy();
+    }
+    if (this.gasChart) {
+      this.gasChart.destroy();
+    }
   }
 }

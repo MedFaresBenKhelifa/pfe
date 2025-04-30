@@ -35,7 +35,7 @@
               required>
           </div>
 
-          <div class="form-line">
+          <div class="email-line">
             <input 
               type="email" 
               formControlName="email"
@@ -61,7 +61,7 @@
                 (click)="togglePasswordVisibility()" 
                 class="eye-icon"
                 aria-label="Afficher/Masquer le mot de passe">
-                <img [src]="isPasswordVisible ? 'images/signup/view.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
+                <img [src]="isPasswordVisible ? 'images/signup/visible.svg' : 'images/signup/hidden.svg'" alt="Icône œil">
               </button>
             </div>
             <span class="text-danger" *ngIf="signupForm.controls.password?.invalid && signupForm.controls.password?.touched">
@@ -95,7 +95,7 @@
         <p>Vous avez déjà un compte ?</p>
       </div>
       <div>
-        <a routerLink="/LogIn" class="login-link">Se connecter</a>
+        <a routerLink="/LogIn" *ngIf="isLoginVisible" (click)="showSignup()" class="login-link">Se connecter</a>
       </div>
     </div>
   </section>
