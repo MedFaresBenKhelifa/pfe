@@ -7,38 +7,34 @@
 }
 
 .page-container {
-  margin-top: 8vw;
-  margin-bottom: 8vw;
-  margin-left: auto;
+  margin: 5vw 0;
 }
 
 .illustrator {
   width: 30vw;
 }
 
-.signup-section {
+.verif-section {
   display: flex;
-  width: 100%;
-  align-items: center;
   justify-content: center;
-  gap: 10vw;
-  font-family: Neulis Alt, sans-serif;
-  flex-wrap: nowrap;
-  padding: 20px 0;
+  align-items: center;
+  padding: 50px 0;
+  /* Less padding */
+  width: 100%;
 }
 
-.signup {
-  border-radius: 24px;
-  border: 2.5px solid var(--Cards-Stroke, #b5b5b5);
-  background: linear-gradient(
-    155deg,
-    rgba(181, 181, 181, 0.25) 0%,
-    rgba(255, 255, 255, 0.25) 50%,
-    rgba(228, 228, 228, 0.25) 100%
-  );
-  backdrop-filter: blur(100px);
-  padding: 35px 50px;
+.verif {
   width: 500px;
+  padding: 35px 50px;
+  border-radius: 24px;
+  border: 2.5px solid var(--Cards-Stroke);
+  background: linear-gradient(155deg,
+      rgba(181, 181, 181, 0.25) 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(228, 228, 228, 0.25) 100%);
+
+
+  backdrop-filter: blur(100px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,118 +43,73 @@
 }
 
 .atb-logo {
-  aspect-ratio: 4;
   width: 30px;
   height: 30px;
+  margin-bottom: 10px;
 }
 
-.signup-title {
-  margin-top: 10px;
+.verif-title {
+  font-size: 1.8rem;
   color: rgb(162, 5, 26);
-  font-size: 2.5vw;
-  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 10px;
 }
-
-
-.signup-form {
-  margin-top: 25px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 28vw;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 59px;
-  background-color: rgba(255, 255, 255, 1);
-  min-height: 20px;
-  padding: 10px 20px;
+.verif-form {
   width: 100%;
-  border: 3px #e4e4e4;
-  font-size: 1vw;
-  transition: all 0.3s ease;
-  outline: none;
-  box-shadow: 2px 2px 6px rgba(162, 5, 26, 0.3);
+  margin-top: 10px;
+}
+.input-group {
+  flex: 1;
+  padding: 8px 18px;
+  border: 2px solid #e4e4e4;
+  border-radius: 25px;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .input-group::placeholder {
-  color: rgba(138, 134, 134, 0.5);
-  font-size: 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.input-group:hover {
-  background-color: #e4e4e4;
+  color: #aaa;
 }
 
 .input-group:focus {
-  border: 2px solid rgb(162, 5, 26);
-  box-shadow: 0px 0px 10px rgba(162, 5, 26, 0.6);
+  border-color: rgb(162, 5, 26);
+  box-shadow: 0 0 4px rgba(162, 5, 26, 0.4);
+  outline: none;
+}
+.input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.password-line {
+.verif-line {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
+
 
 .cta-button {
-  text-shadow: 2px 2px 8px rgba(162, 5, 26, 0.5);
-  border-radius: 43px;
-  box-shadow: 4px 4px 12px rgba(162, 5, 26, 0.5);
-  background-color: rgb(162, 5, 26);
-  margin-top: 25px;
-  font-size: 1.2vw;
-  font-weight: 400;
-  color: #e4e4e4;
-  line-height: 1.2;
-  padding: 8px 20px;
+  margin-top: 15px;
+  padding: 10px 25px;
+  font-size: 1rem;
   border: 2px solid rgb(162, 5, 26);
+  border-radius: 25px;
+  background-color: rgb(162, 5, 26);
+  color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
+  transition: all 0.3s;
 
-.cta-button::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgb(162, 5, 26);
-  font-size: 1.5vw;
-  opacity: 0;
-  transition: opacity 0.3s ease, left 0.3s ease;
-}
 
-.cta-button:hover::before {
-  content: ">";
-  left: 10px;
-  opacity: 1;
 }
-
 .cta-button:hover {
-  padding: 10px 2vw;
   background-color: transparent;
   color: rgb(162, 5, 26);
-  transform: translateY(-2px);
 }
 
-.cta-button:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
+
 
 
 
