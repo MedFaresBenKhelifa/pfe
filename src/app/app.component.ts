@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { ToastComponent } from './components/toast/toast.component';
-import { MonitoringService } from './services/monitoring.service';
 import { ToastService } from './services/toast.service';
 
 

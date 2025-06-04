@@ -9,46 +9,46 @@ export class AuthToggleService {
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 
-  private isSignedUp = new BehaviorSubject<boolean>(this.loadState('isSignedUp', true));
-  private isLoginVisible = new BehaviorSubject<boolean>(this.loadState('isLoginVisible', false));
-  private isLoggedIn = new BehaviorSubject<boolean>(this.loadState('isLoggedIn', false));
-  private navBar = new BehaviorSubject<boolean>(this.loadState('navBar', false ));
+  // Private subjects with initial state from localStorage or defaults
+  private isSignedUpSubject = new BehaviorSubject<boolean>(this.getInitialState('isSignedUp', true));
+  private isLoginVisibleSubject = new BehaviorSubject<boolean>(this.getInitialState('isLoginVisible', false));
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.getInitialState('isLoggedIn', false));
+  private navBarSubject = new BehaviorSubject<boolean>(this.getInitialState('navBar', false));
 
-  isSignedUp$ = this.isSignedUp.asObservable();
-  isLoginVisible$ = this.isLoginVisible.asObservable();
-  isLoggedIn$ = this.isLoggedIn.asObservable();
-  navBar$ = this.navBar.asObservable();
+  // Public observables
+  isSignedUp$ = this.isSignedUpSubject.asObservable();
+  isLoginVisible$ = this.isLoginVisibleSubject.asObservable();
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  navBar$ = this.navBarSubject.asObservable();
 
+  // Setter methods
   setSignUpVisible(state: boolean) {
-    this.saveState('isSignedUp', state);
-    this.isSignedUp.next(state);
+    this.setState('isSignedUp', state, this.isSignedUpSubject);
   }
 
   setLoginVisible(state: boolean) {
-    this.saveState('isLoginVisible', state);
-    this.isLoginVisible.next(state);
+    this.setState('isLoginVisible', state, this.isLoginVisibleSubject);
   }
 
   setLoggedIn(state: boolean) {
-    this.saveState('isLoggedIn', state);
-    this.isLoggedIn.next(state);
+    this.setState('isLoggedIn', state, this.isLoggedInSubject);
   }
 
   setNavBar(state: boolean) {
-    this.saveState('navBar', state);
-    this.navBar.next(state);
+    this.setState('navBar', state, this.navBarSubject);
   }
 
-  private loadState(key: string, defaultValue: boolean): boolean {
+  // Helpers
+  private getInitialState(key: string, defaultValue: boolean): boolean {
     if (!this.isBrowser) return defaultValue;
-
     const stored = localStorage.getItem(key);
     return stored !== null ? JSON.parse(stored) : defaultValue;
   }
 
-  private saveState(key: string, value: boolean): void {
+  private setState(key: string, value: boolean, subject: BehaviorSubject<boolean>): void {
     if (this.isBrowser) {
       localStorage.setItem(key, JSON.stringify(value));
     }
+    subject.next(value);
   }
 }

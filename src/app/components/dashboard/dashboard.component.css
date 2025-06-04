@@ -1,43 +1,64 @@
-.dashboard-header h1 {
-  margin-top: 90px; /* Moves title lower */
-}
+/* Font and header */
 * {
-  font-family:  Georgia , serif;
+  font-family: Georgia, serif;
 }
-#atb{
+
+#atb {
   color: rgb(162, 5, 26);
 }
 
-/* Dashboard header */
 .dashboard-header {
   text-align: center;
   margin-bottom: 1rem;
   padding: 1.5rem;
 }
 
-/* Dashboard grid */
+.dashboard-header h1 {
+  margin-top: 90px;
+}
+
+/* Grid Layout */
 .dashboard-grid {
   margin-left: 30px;
   margin-right: 30px;
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "access-log access-log"
+    "temperature gas";
 }
 
-/* Card styling */
+/* Assign grid areas */
+.access-log-card {
+  grid-area: access-log;
+}
+
+.chart-card:nth-of-type(2) {
+  grid-area: temperature;
+}
+
+.chart-card:nth-of-type(3) {
+  grid-area: gas;
+}
+
+/* Card style */
 .card {
   padding: 1.5rem;
   transition: transform 0.2s ease, background 0.3s, color 0.3s;
 }
 
-/* Card hover effect */
 .card:hover {
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
+/* Responsive fallback */
 @media (max-width: 768px) {
   .dashboard-grid {
+    grid-template-areas:
+      "access-log"
+      "temperature"
+      "gas";
     grid-template-columns: 1fr;
   }
 
@@ -45,6 +66,140 @@
     padding: 1rem;
   }
 }
-/* Toast notifications - improved version */
+
+/* Access log section */
+.access-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-input {
+  margin-left: 10px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: #fefefe;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar-input:hover {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+}
+
+.calendar-input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
+}
+
+.calendar-input::-webkit-calendar-picker-indicator {
+  background: url('data:image/svg+xml;utf8,<svg fill="%232c3e50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7v-5zm9-8h-1V0h-2v2H7V0H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2h-1V0h-2v2zM4 20V9h16v11H4z"/></svg>') no-repeat center;
+  background-size: 16px 16px;
+  opacity: 0.6;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.calendar-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Search bar */
+.search-bar {
+  margin-right: 400px;
+  padding: 6px 200px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.search-bar:focus {
+  border-color: rgb(162, 5, 26);
+  box-shadow: 0 0 0 2px rgba(162, 5, 26, 0.588);
+}
 
 
+
+/* Scroll container */
+.access-log-scroll-container {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.access-log-container {
+  padding: 5px;
+}
+
+.log-entry {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.log-entry:hover {
+  background: #f1f3f5;
+}
+
+.log-entry .employee {
+  flex: 1;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.log-entry .type {
+  width: 80px;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.log-entry .time {
+  width: 60px;
+  text-align: right;
+}
+
+/* Scrollbar styling */
+.access-log-scroll-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.access-log-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.access-log-scroll-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+.access-log-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

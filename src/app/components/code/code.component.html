@@ -1,24 +1,30 @@
 <main class="page-container">
-    <section class="code-section">
-      <div class="code">
-        <img src="images/header/logo.png" class="atb-logo" alt="Logo">
-        <h1 class="code-title">Vérification du Code</h1>
-        <div class="code-form">
-          <form class="form">
-            <div class="password-line">
-              <input 
-                type="text" 
-                placeholder="Entrez le code reçu" 
-                class="input-group" 
-                id="verification-code" 
-                maxlength="6"
-                required
-              />
-            </div>
-          </form>
-        </div>
-        <button (click)="verifCode()" class="cta-button">Valider le Code</button>
+  <section class="code-section">
+    <div class="code">
+      <img src="images/header/logo.png" class="atb-logo" alt="Logo">
+      <h1 class="code-title">Vérification du Code</h1>
+
+      <!-- 🕒 Timer -->
+      <p class="timer-text">
+        Le code va expirer dans {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }} minutes
+      </p>
+
+      <div class="code-form">
+        <form class="form">
+          <div class="password-line">
+            <input 
+              type="text" 
+              placeholder="Entrez le code reçu" 
+              class="input-group" 
+              id="verification-code" 
+              maxlength="6"
+              required
+            />
+          </div>
+        </form>
       </div>
-    </section>
-  </main>
-  
+
+      <button (click)="verifCode()" class="cta-button" [disabled]="isExpired">Valider le Code</button>
+    </div>
+  </section>
+</main>

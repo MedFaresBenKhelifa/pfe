@@ -29,20 +29,22 @@ export class SignupComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private authToggleService: AuthToggleService ,
+    private authToggleService: AuthToggleService
   ) {
     this.authToggleService.isLoginVisible$.subscribe((state) => {
-    this.isLoginVisible = state;
-  });
-}
+      this.isLoginVisible = state;
+    });
+  }
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
-  showSignup(){
+
+  showSignup() {
     this.authToggleService.setSignUpVisible(true);
     this.authToggleService.setLoginVisible(false);
   }
+
   onSubmit() {
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
@@ -58,17 +60,23 @@ export class SignupComponent {
     this.authService.register(firstName!, lastName!, email!, password!)
       .subscribe({
         next: (response: any) => {
-          this.successMessage = 'Compte créé avec succès';
-          setTimeout(() => {
+          if (response.success && response.token) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('currentUser', JSON.stringify(response.user));
+            alert("Compte Crée avec Succès")
             this.authToggleService.setLoggedIn(true);
             this.authToggleService.setSignUpVisible(false);
-            this.authToggleService.setLoginVisible(false); 
+            this.authToggleService.setLoginVisible(false);
             this.authToggleService.setNavBar(true);
-            this.router.navigate(['/Dashboard/']);
-          }, 2000);
+
+            this.router.navigate(['/LogIn']);
+          } else {
+            this.errorMessage = response.error || 'Erreur lors de l\'inscription';
+          }
+          this.isLoading = false;
         },
-        error: (error: any) => {
-          this.errorMessage = error.error?.error || 'Erreur lors de l\'inscription';
+        error: () => {
+          this.errorMessage = 'Erreur serveur. Veuillez réessayer.';
           this.isLoading = false;
         }
       });

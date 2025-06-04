@@ -12,12 +12,15 @@ import { CommonModule } from '@angular/common';
 export class ToastComponent {
   constructor(public toastService: ToastService) {}
 
-  // These getters match your template bindings exactly
   get showTempToast$() {
     return this.toastService.showTempToast$;
   }
 
   get showHighGasToast$() {
     return this.toastService.showHighGasToast$;
+  }
+
+  get showUnknownToast$() {
+    return this.toastService.showUnknownToast$;
   }
 }

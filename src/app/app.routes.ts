@@ -10,19 +10,16 @@ import { GererComponent } from './components/gerer/gerer.component';
 import { CodeComponent } from './components/code/code.component';
 import { VerifComponent } from './components/verif/verif.component';
 
+import { AuthGuard } from './auth.guard';
+
 export const routes: Routes = [
   { path: 'LogIn', component: LoginComponent },
   { path: 'SignUp', component: SignupComponent },
-  { path: 'Change', component: ChangerMdpComponent }, // Assurez-vous que le composant existe
-  { path: 'Dashboard', component: DashboardComponent },
-  { path: 'Ajout', component: AjoutComponent },
-  { path: 'Gerer', component: GererComponent },
+  { path: 'Change', component: ChangerMdpComponent },
+  { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, 
+  { path: 'Ajout', component: AjoutComponent, canActivate: [AuthGuard] },         
+  { path: 'Gerer', component: GererComponent, canActivate: [AuthGuard] },         
   { path: 'Code', component: CodeComponent },
   { path: 'Verif', component: VerifComponent },
   { path: '', redirectTo: 'LogIn', pathMatch: 'full' }
 ];
-@NgModule({
-  imports:[RouterModule.forRoot(routes)],
-  exports:[RouterModule]
-})
-export class AppRouingModule {}

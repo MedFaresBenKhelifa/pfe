@@ -21,18 +21,29 @@
       <div class="signup-form">
         <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
           <div class="form-line">
-            <input 
-              type="text" 
-              formControlName="firstName"
-              placeholder="Prénom" 
-              class="input-group" 
-              required>
-            <input 
-              type="text" 
-              formControlName="lastName"
-              placeholder="Nom" 
-              class="input-group" 
-              required>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                formControlName="firstName"
+                placeholder="Prénom" 
+                class="input-group" 
+                required>
+              <span class="text-danger" *ngIf="signupForm.controls.firstName?.invalid && signupForm.controls.firstName?.touched">
+                Prénom est requis
+              </span>
+            </div>
+
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                formControlName="lastName"
+                placeholder="Nom" 
+                class="input-group" 
+                required>
+              <span class="text-danger" *ngIf="signupForm.controls.lastName?.invalid && signupForm.controls.lastName?.touched">
+                Nom est requis
+              </span>
+            </div>
           </div>
 
           <div class="email-line">
@@ -99,3 +110,4 @@
       </div>
     </div>
   </section>
+</main>

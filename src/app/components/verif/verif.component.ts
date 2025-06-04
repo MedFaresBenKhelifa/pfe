@@ -25,12 +25,12 @@ export class VerifComponent {
     this.http.post('http://localhost:8000/api/request-password-reset/', { email: this.email }, { withCredentials: true })
       .subscribe({
         next: (response: any) => {
-          alert('Code envoyé par email.');
+          alert('Code envoyé par email et va expiré dans 30 minutes....');
           localStorage.setItem('reset_email', this.email); // stocker email pour l'étape suivante
           this.router.navigate(['/Code']);
         },
         error: (error) => {
-          console.error('Erreur complète :', error.error); // 👈 Affiche tout l'erreur
+          console.error('Erreur complète :', error.error);
           alert('Erreur lors de l\'envoi du code');
         }
         

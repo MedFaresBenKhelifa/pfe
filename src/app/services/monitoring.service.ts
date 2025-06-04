@@ -1,56 +1,79 @@
 import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
+import mqtt, { MqttClient } from 'mqtt';
 
 @Injectable({ providedIn: 'root' })
 export class MonitoringService {
-  private intervalId: any;
+  private mqttClient!: MqttClient;
+
   public currentTemperatures: number[] = [];
   public currentGasLevels: number[] = [];
+  public timestamps: string[] = []; // ← ajout des timestamps
 
   constructor(private toastService: ToastService) {
-    this.startMonitoring();
+    this.initializeArrays();
+    this.connectToMQTTBroker();
   }
 
-  startMonitoring() {
-    this.currentTemperatures = this.generateRandomTemperatures();
-    this.currentGasLevels = this.generateRandomGasLevels();
-
-    this.intervalId = setInterval(() => {
-      // First update data
-      this.updateDataArrays();
-      
-      // Then trigger toasts after a small delay
-      setTimeout(() => this.checkAlerts(), 50);
-    }, 10000);
+  private initializeArrays(): void {
+    this.currentTemperatures = Array(6).fill(0);
+    this.currentGasLevels = Array(6).fill(0);
+    this.timestamps = Array(6).fill(''); // ← initialise les labels
   }
 
-  private updateDataArrays() {
+  private connectToMQTTBroker(): void {
+    this.mqttClient = mqtt.connect('ws://192.168.1.169:9001');
+
+    this.mqttClient.on('connect', () => {
+      console.log('✅ Connecté au broker MQTT via WebSocket');
+      this.mqttClient.subscribe('capteurs/temperature');
+      this.mqttClient.subscribe('capteurs/gaz');
+    });
+
+    this.mqttClient.on('message', (topic: string, payload: Buffer) => {
+      const message = payload.toString();
+
+      if (topic === 'capteurs/temperature') {
+        const temp = parseFloat(message);
+        if (!isNaN(temp)) {
+          this.updateTemperature(temp);
+        }
+      }
+
+      if (topic === 'capteurs/gaz') {
+        const gas = parseInt(message, 10);
+        if (!isNaN(gas)) {
+          this.updateGasLevel(gas);
+        }
+      }
+    });
+  }
+
+  private updateTemperature(value: number): void {
     this.currentTemperatures.shift();
-    const newTemp = Number((Math.random() * 10 + 20).toFixed(1));
-    this.currentTemperatures.push(newTemp);
+    this.currentTemperatures.push(value);
 
-    this.currentGasLevels.shift();
-    const newGas = Math.floor(Math.random() * 300 + 100);
-    this.currentGasLevels.push(newGas);
-  }
+    // Mettre à jour le timestamp à chaque nouvelle température
+    this.timestamps.shift();
+    this.timestamps.push(
+      new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    );
 
-  private checkAlerts() {
-    const latestTemp = this.currentTemperatures.slice(-1)[0];
-    const latestGas = this.currentGasLevels.slice(-1)[0];
-
-    if (latestTemp > 20) {
+    if (value > 30) {
       this.toastService.triggerTempToast();
     }
-    if (latestGas > 200) {
+  }
+
+  private updateGasLevel(value: number): void {
+    this.currentGasLevels.shift();
+    this.currentGasLevels.push(value);
+
+    if (value > 300) {
       this.toastService.triggerHighGasToast();
     }
   }
 
-  private generateRandomTemperatures(): number[] {
-    return Array(6).fill(0).map(() => Number((Math.random() * 10 + 20).toFixed(1)));
-  }
-
-  private generateRandomGasLevels(): number[] {
-    return Array(6).fill(0).map(() => Math.floor(Math.random() * 300 + 100));
+  public resetData(): void {
+    this.initializeArrays();
   }
 }

@@ -1,15 +1,25 @@
 <div class="toast-container">
+  <!-- Temperature Alert -->
   <div class="toast temp" [class.show]="toastService.showTempToast$ | async">
     <span class="toast-message">
       Anomalie détectée : température anormalement élevée. Intervention recommandée.
     </span>
     <button class="toast-close" (click)="toastService.dismissTemp()">×</button>
   </div>
-  
+
+  <!-- Gas Alert -->
   <div class="toast gas" [class.show]="toastService.showHighGasToast$ | async">
     <span class="toast-message">
       Alerte sécurité : concentration de gaz anormale. Merci de procéder aux vérifications.
     </span>
     <button class="toast-close" (click)="toastService.dismissGas()">×</button>
+  </div>
+
+  <!-- Unknown Face Alert -->
+  <div class="toast unknown" [class.show]="toastService.showUnknownToast$ | async">
+    <span class="toast-message">
+      ⚠️ Visiteur Inconnu détecté ! Veuillez vérifier l’accès immédiatement.
+    </span>
+    <button class="toast-close" (click)="toastService.dismissUnknown()">×</button>
   </div>
 </div>

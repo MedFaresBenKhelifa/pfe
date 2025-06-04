@@ -27,26 +27,44 @@
   pointer-events: none;
 }
 
-/* Show State - Restored Slide Down Animation */
+/* Show State - Slide Down */
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
-/* Single Toast Position */
+/* Base Position - All toasts start from the same top */
 .toast.temp {
-  top: 0;
+  top: 30px;
 }
-
 .toast.gas {
-  top: 0;
+  top: 30px;
+}
+.toast.unknown {
+  top: 30px;
 }
 
-/* Stacked Position (when both are visible) */
+/* Stack Logic (only works well if toasts are rendered in fixed DOM order) */
+
+/* Gas appears after Temp */
 .toast.temp.show + .toast.gas.show {
-  top: 90px; /* Space between toasts */
-  transform: translateX(-50%) translateY(0);
+  top: 90px;
+}
+
+/* Unknown appears after Temp + Gas */
+.toast.temp.show + .toast.gas.show + .toast.unknown.show {
+  top: 150px;
+}
+
+/* Unknown appears after only Temp (no gas) */
+.toast.temp.show + .toast.unknown.show {
+  top: 90px;
+}
+
+/* Unknown appears after only Gas (no temp) */
+.toast.gas.show + .toast.unknown.show {
+  top: 90px;
 }
 
 /* Colors */
@@ -58,6 +76,11 @@
 .toast.gas {
   background-color: #0033cc;
   color: white;
+}
+
+.toast.unknown {
+  background-color: #ffc107;
+  color: #212529;
 }
 
 /* Icon */
@@ -79,7 +102,6 @@
   opacity: 0.7;
   transition: opacity 0.2s;
 }
-
 .toast-close:hover {
   opacity: 1;
 }

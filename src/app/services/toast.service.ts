@@ -1,4 +1,3 @@
-// toast.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,20 +5,23 @@ import { BehaviorSubject } from 'rxjs';
 export class ToastService {
   private showTempToastSubject = new BehaviorSubject<boolean>(false);
   private showHighGasToastSubject = new BehaviorSubject<boolean>(false);
-  private enabled = true; // Control flag
+  private showUnknownToastSubject = new BehaviorSubject<boolean>(false);
+  private genericMessageSubject = new BehaviorSubject<string | null>(null);
+  private enabled = true;
 
   // Public observables
   showTempToast$ = this.showTempToastSubject.asObservable();
   showHighGasToast$ = this.showHighGasToastSubject.asObservable();
+  showUnknownToast$ = this.showUnknownToastSubject.asObservable();
+  genericMessage$ = this.genericMessageSubject.asObservable();
 
-  // New method to control visibility
+  // Enable or disable all toasts
   setEnabled(state: boolean): void {
     this.enabled = state;
-    if (!state) {
-      this.hideAllToasts();
-    }
+    if (!state) this.hideAllToasts();
   }
 
+  // Trigger temperature warning toast
   triggerTempToast(): void {
     if (this.enabled) {
       this.showTempToastSubject.next(true);
@@ -27,21 +29,52 @@ export class ToastService {
     }
   }
 
+  // Trigger high gas warning toast
   triggerHighGasToast(): void {
     if (this.enabled) {
       this.showHighGasToastSubject.next(true);
       setTimeout(() => this.showHighGasToastSubject.next(false), 8000);
     }
   }
-  dismissTemp() {
+
+  // Trigger unknown person toast
+  triggerUnknownToast(): void {
+    if (this.enabled) {
+      this.showUnknownToastSubject.next(true);
+      setTimeout(() => this.showUnknownToastSubject.next(false), 8000);
+    }
+  }
+
+  // Show custom message toast
+  showGenericMessage(message: string): void {
+    if (this.enabled) {
+      this.genericMessageSubject.next(message);
+      setTimeout(() => this.genericMessageSubject.next(null), 8000);
+    }
+  }
+
+  // Manual dismissal methods
+  dismissTemp(): void {
     this.showTempToastSubject.next(false);
   }
 
-  dismissGas() {
+  dismissGas(): void {
     this.showHighGasToastSubject.next(false);
   }
+
+  dismissUnknown(): void {
+    this.showUnknownToastSubject.next(false);
+  }
+
+  dismissGeneric(): void {
+    this.genericMessageSubject.next(null);
+  }
+
+  // Hide everything
   private hideAllToasts(): void {
-    this.showTempToastSubject.next(false);
-    this.showHighGasToastSubject.next(false);
+    this.dismissTemp();
+    this.dismissGas();
+    this.dismissUnknown();
+    this.dismissGeneric();
   }
 }

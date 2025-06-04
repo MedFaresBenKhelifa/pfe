@@ -13,6 +13,14 @@
 .illustrator {
   width: 30vw;
 }
+.timer-text {
+  font-size: 1rem;
+  color: red;
+  font-weight: bold;
+  margin: 10px 0 15px;
+  text-align: center;
+}
+
 
 .code-section {
   display: flex;

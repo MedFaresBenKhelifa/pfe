@@ -3,24 +3,51 @@
 </header>
 
 <main class="dashboard-grid">
-  <section class="card">
+  <!-- Access Log Section (Full Width Top) -->
+  <section class="card access-log-card full-width">
+    <div class="access-header">
+      <h2>Historique d'Accès</h2>
+      <div class="access-controls">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Rechercher par nom"
+        class="search-bar"
+        (input)="filterLogsByName(searchInput.value)"
+      />
+        <input
+          type="date"
+          (change)="onDateChange($event)"
+          class="calendar-input"
+        />
+      </div>
+    </div>
+
+    <div class="access-log-scroll-container">
+      <div class="access-log-container">
+        @for (log of filteredLogs ; track log) {
+          <div
+            class="log-entry"
+            [class.unknown]="log.employeeName === 'Unknown'"
+            (click)="downloadPhoto(log.photoHash)"
+          >
+            <span class="employee">{{ log.employeeName || 'Inconnu' }}</span>
+            <span class="type">{{ getAccessType(log.accessType) }}</span>
+            <span class="time">{{ formatTimestamp(log.timestamp) }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Charts Row -->
+  <section class="card chart-card">
     <h2>Tendances de Température</h2>
-    <canvas #temperatureCanvas id="temperatureChart"></canvas>
+    <canvas id="temperatureChart"></canvas>
   </section>
 
-  <section class="card">
+  <section class="card chart-card">
     <h2>Niveaux de Gaz</h2>
-    <canvas #gasCanvas id="gasChart"></canvas>
-  </section>
-
-  <section class="card">
-    <h2>Journal des Accès</h2>
-    <ul id="accessLog">
-      <li>John Doe - Entrée - 10h15</li>
-      <li>Jane Smith - Sortie - 10h45</li>
-      <li>Michael Brown - Entrée - 11h05</li>
-    </ul>
+    <canvas id="gasChart"></canvas>
   </section>
 </main>
-
-

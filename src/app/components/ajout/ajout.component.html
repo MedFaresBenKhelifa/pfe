@@ -6,11 +6,11 @@
             <div class="ajout-form">
                 <form class="form" (submit)="addEmployee(firstName, lastName, email); $event.preventDefault()">
                     <div class="form-line">
-                        <input #firstName type="text" placeholder="Prénom" class="input-group" name="first-name" required>
-                        <input #lastName type="text" placeholder="Nom" class="input-group" name="last-name" required>
+                        <input #firstName type="text" placeholder="Prénom" class="input-group" name="first-name" >
+                        <input #lastName type="text" placeholder="Nom" class="input-group" name="last-name" >
                     </div>
                     <div class="form-line">
-                        <input #email type="email" placeholder="Email" class="input-group" name="email" required>
+                        <input #email type="email" placeholder="Email" class="input-group" name="email" >
                     </div>
                     <div class="form-line">
                         <input type="file" class="form-control input-group" id="profile-image" (change)="onFileSelected($event)" accept="image/*">
